@@ -1,12 +1,13 @@
 /*global tags*/
 /*eslint no-undef: "error"*/
 
-
+//chamar os recrimentos globais
 const tokens = require("./data/tokens.json")
 const config = require("./data/config")
 const firebase = require("firebase")
 global.tags = require("./data/messages/console/tags.json")
 
+//iniciar 
 const p1 = new Promise(resolve => {
     for (let i in tokens.firebase.config) {
         if (tokens.firebase.config[i]) return
@@ -34,4 +35,16 @@ const p1 = new Promise(resolve => {
             console.log(error.message)
             return process.exit()
         })
+})
+
+//depois de iniciar o banco de dados
+//ligar o bot
+p1.then(async () => {
+    const Discord = require("discord.js")
+    const client = new Discord.Client()
+
+    client.prefix = config.prefix
+    client.dev = config.dev
+
+    client.login(tokens.discord.token)
 })

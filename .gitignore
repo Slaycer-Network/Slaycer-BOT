@@ -5,6 +5,10 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+#not necessary
+package-lock.json
+.theia
+
 # Runtime data
 pids
 *.pid

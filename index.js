@@ -1,3 +1,7 @@
+/*global tags*/
+/*eslint no-undef: "error"*/
+
+
 const tokens = require("./data/tokens.json")
 const config = require("./data/config")
 const firebase = require("firebase")

@@ -7,12 +7,13 @@ const config = require("./data/config")
 const firebase = require("firebase")
 global.tags = require("./data/messages/console/tags.json")
 
-//iniciar 
-const p1 = new Promise(resolve => {
-    for (let i in tokens.firebase.config) {
-        if (tokens.firebase.config[i]) return
+//iniciar
+const p1 = new Promise((resolve) => {
+    for (i in tokens.firebase.config) {
+        if (!tokens.firebase.config[i]) {
         console.log(`[${tags.WARNING}] Faltam dados para que a firebase funcionam!!`)
         process.exit()
+        }
     }
     firebase.initializeApp(tokens.firebase.config)
 
@@ -29,7 +30,7 @@ const p1 = new Promise(resolve => {
             console.log(`[${tags.SUCCESS}] Banco de Dados autenticado com sucesso`)
             resolve()
         }, async (error) => {
-            if (error.code == "auth/operation-not-allowed") return NoAuthentication()
+            if (error.code === "auth/operation-not-allowed") return NoAuthentication()
             console.log(`[${tags.ERROR}] Falha ao autenticar o banco de dados!!`)
             console.log('Motivo do erro: ' + error.code)
             console.log(error.message)

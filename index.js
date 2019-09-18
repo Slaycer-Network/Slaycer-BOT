@@ -61,10 +61,16 @@ p1.then(async () => {
     client.dev = config.dev //desenvolvedores com permição suprema no bot
     client.db = firebase.database() //variavel responsavel pela database
     client.cooldown = new Set() //sistema para dar delay nos comandos
+    global.commands = {} //varialvel por conter os comandos
+
+    //chamar o fs para ler as pastas
+    //const fs = require('fs')
 
     //carregar os comandos
+    //const fs = fs.readFile('')
 
     //carregar os eventos
+    //const fs = fs.readFile('')
 
     //sistema para que o bot ligue no discord
     client.login(tokens.discord.token)

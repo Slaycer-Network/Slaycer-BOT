@@ -9,7 +9,7 @@ global.tags = require("./data/messages/console/tags.json")
 
 //iniciar
 const p1 = new Promise((resolve) => {
-    for (i in tokens.firebase.config) {
+    for (let i in tokens.firebase.config) {
         if (!tokens.firebase.config[i]) {
         console.log(`[${tags.WARNING}] Faltam dados para que a firebase funcionam!!`)
         process.exit()

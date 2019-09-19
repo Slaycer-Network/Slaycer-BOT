@@ -3,5 +3,7 @@
 
     "ERROR": "ERRO",
 
-    "SUCCESS": "SUCESSO"
+    "SUCCESS": "SUCESSO",
+
+    "INFO": "INFO"
 }

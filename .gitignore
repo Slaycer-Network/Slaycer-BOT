@@ -8,6 +8,7 @@ yarn-error.log*
 #not necessary
 package-lock.json
 .theia
+.vscode
 
 # Runtime data
 pids

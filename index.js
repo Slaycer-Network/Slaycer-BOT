@@ -1,4 +1,4 @@
-/*global tags*/
+/*global tags, CMDs*/
 /*eslint no-undef: "error"*/
 
 //chamar os recrimentos globais
@@ -53,24 +53,37 @@ const p1 = new Promise((resolve) => {
 
 //ligar o bot
 p1.then(async () => {
+    //chamar a discord.js para que o bot funcione
     const Discord = require("discord.js")
     const client = new Discord.Client()
 
     //variaveis necessárias para tudo funcionar
-    client.prefix = config.prefix  //prexixo padrão
-    client.dev = config.dev //desenvolvedores com permição suprema no bot
-    client.db = firebase.database() //variavel responsavel pela database
-    client.cooldown = new Set() //sistema para dar delay nos comandos
-    global.commands = {} //varialvel por conter os comandos
+    client.prefix = config.prefix                       //prexixo padrão
+    client.dev = config.dev                             //desenvolvedores com permição suprema no bot
+    client.db = firebase.database()                     //variavel responsavel pela database
+    client.cooldown = new Set()                         //sistema para dar delay nos comandos
+    global.commands = {}                                //varialvel por conter os comandos
+    global.CMDs = require("./GlobalFuncions/cmd.js")    //global com funções dos comandos
 
     //chamar o fs para ler as pastas
-    //const fs = require('fs')
+    const fs = require('fs')
 
     //carregar os comandos
-    //const fs = fs.readFile('')
+    const cmdFiles = fs.readdirSync('./commands/')          //lê o que esta no diretório dos comandos
+    cmdFiles.forEach(async (file) => {                      //executa uma funçao para tudo que esteja lá
+        try {                                               //tenta registrar o comando
+            if (file.split('.').slice(-1)[0] === 'js') {    //verifica se o ficheiro encontrado é js
+                const cmd = require(`./commands/${file}`)   //se sim chama o ficheiro
+                await CMDs.register(cmd, client.db)         //chama a função dos comandos que registra
+            }
+        } catch (error) { //deu erro dá um aviso aqui
+            console.log(`[${tags.ERROR}] Não fui possivel executar o comando ${file}:`)
+            console.log(e)
+        }
+    })
 
     //carregar os eventos
-    //const fs = fs.readFile('')
+    //const evtFiles = fs.readFile('')
 
     //sistema para que o bot ligue no discord
     client.login(tokens.discord.token)

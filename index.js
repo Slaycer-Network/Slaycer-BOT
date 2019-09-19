@@ -78,7 +78,7 @@ p1.then(async () => {
             }
         } catch (error) { //deu erro dá um aviso aqui
             console.log(`[${tags.ERROR}] Não fui possivel executar o comando ${file}:`)
-            console.log(e)
+            console.log(error)
         }
     })
 

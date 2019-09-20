@@ -83,7 +83,26 @@ p1.then(async () => {
     })
 
     //carregar os eventos
-    //const evtFiles = fs.readFile('')
+    //primeiro carregar o eventos que vão ficar sempre ligado
+    const onFiles = fs.readdirSync('./events/on/')
+    onFiles.forEach(async (file) => {
+        if (file.split('.').slice(-1)[0] === 'js') {
+            const onName = file.split('.')[0]
+            const run = require(`./events/on/${file}`)
+            client.on(onName, run.bind(null, client))
+        }
+    })
+
+
+    //agora carregar eventos que só acontece uma vez
+    const onceFiles = fs.readdirSync('./events/once/')
+    onceFiles.forEach(async (file) => {
+        if (file.split('.').slice(-1)[0] === 'js') {
+            const onceName = file.split('.')[0]
+            const run = require(`./events/once/${file}`)
+            client.once(onceName, run.bind(null, client))
+        }
+    })
 
     //sistema para que o bot ligue no discord
     client.login(tokens.discord.token)

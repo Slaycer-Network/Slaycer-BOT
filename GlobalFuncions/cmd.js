@@ -10,7 +10,7 @@ module.exports = {
                     return snap.val()
                 })
                 .catch(async (e) => {
-                    console.log(`[${tags.ERROR}] falha ao verificar o ${file.split('.')[0]}`)
+                    console.log(`[${tags.ERROR}] falha ao verificar o comando ${file.split('.')[0]} na database!!`)
                     console.log(e.message)
                     return process.exit()
                 })

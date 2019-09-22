@@ -3,7 +3,7 @@
 
 //chamar os recrimentos globais
 const tokens = require("./data/tokens.json")
-const config = require("./data/config")
+const config = require("./data/config.json")
 const firebase = require("firebase")
 global.tags = require("./data/messages/console/tags.json")
 
@@ -58,8 +58,8 @@ p1.then(async () => {
     const client = new Discord.Client()
 
     //variaveis necessárias para tudo funcionar
-    client.prefix = config.prefix                       //prexixo padrão
-    client.dev = config.dev                             //desenvolvedores com permição suprema no bot
+    client.prefix = config.discord.prefix               //prexixo padrão
+    client.dev = config.discord.dev                     //desenvolvedores com permição suprema no bot
     client.db = firebase.database()                     //variavel responsavel pela database
     client.cooldown = new Set()                         //sistema para dar delay nos comandos
     global.commands = {}                                //varialvel por conter os comandos

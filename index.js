@@ -22,7 +22,7 @@ const p1 = new Promise((resolve) => {
 
     //função se que é ativada quando não houver autenticação!!
     async function NoAuthentication() {
-        console.log(`[${tags.SUCCESS}] Ligada mas sem Autenticação!! \n [${tags.WARNING}] A sua Autenticação não fui isso significa que só pode usar dados publicos!!`)
+        console.log(`[${tags.SUCCESS}] Ligada mas sem Autenticação!!\n[${tags.WARNING}] A sua Autenticação não fui isso significa que só pode usar dados publicos!!`)
         return resolve()
     }
 
@@ -74,7 +74,7 @@ p1.then(async () => {
         try {                                               //tenta registrar o comando
             if (file.split('.').slice(-1)[0] === 'js') {    //verifica se o ficheiro encontrado é js
                 const cmd = require(`./commands/${file}`)   //se sim chama o ficheiro
-                await CMDs.register(cmd, client.db)         //chama a função dos comandos que registra
+                await CMDs.register(cmd, file, client.db)         //chama a função dos comandos que registra
             }
         } catch (error) { //deu erro dá um aviso aqui
             console.log(`[${tags.ERROR}] Não fui possivel executar o comando ${file}:`)

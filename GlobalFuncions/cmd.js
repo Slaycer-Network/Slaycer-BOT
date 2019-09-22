@@ -25,7 +25,7 @@ module.exports = {
                     reason: "null"
                 })
                 .then(async () => {
-                    console.log(`[${tags.INFO}] Comando: ${file.split('.')[1]}} registrado`)
+                    console.log(`[${tags.INFO}] Comando: ${file.split('.')[1]} registrado`)
                     data = await verify()
                 })
                 .catch(async (e) => {
@@ -48,6 +48,6 @@ module.exports = {
             }
         }
 
-        return console.log(`[${tags.SUCCESS}] Comando: ${file.split('.')[1]} ativado!!`)
+        return console.log(`[${tags.SUCCESS}] Comando: ${cmd.help.name} ativado!!`)
     }
 }

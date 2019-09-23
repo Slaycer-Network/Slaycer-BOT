@@ -18,14 +18,16 @@ module.exports = {
     run: async (client, message, args) => {
         try {
             const embed1 = new Discord.MessageEmbed()
+                .setColor([250, 244, 41])
                 .setTitle('Ping?')
 
             const m = await message.channel.send(embed1)
 
             const embed2 = new Discord.MessageEmbed()
+                .setColor([153, 61, 0])
                 .setTitle('🏓 Pong!')
-                .addField('⌚ Latência', `${(m.createdTimestamp - message.createdTimestamp)}ms`)
-                .addField('⚡ Latencia da API', `${Math.round(client.ws.ping)}ms`)
+                .addField('⌚ Latência', `${(m.createdTimestamp - message.createdTimestamp)}ms`, true)
+                .addField('⚡ Latencia da API', `${Math.round(client.ws.ping)}ms`, true)
 
             m.edit(`${message.author}`, embed2)
         } catch (error) {

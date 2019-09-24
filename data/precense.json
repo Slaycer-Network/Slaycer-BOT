@@ -1,0 +1,16 @@
+[
+    {
+        "status": "online",
+        "activity": {
+            "name": "TESTE1",
+            "type": "PLAYING"
+        }
+    },
+    {
+        "status": "online",
+        "activity": {
+            "name": "TESTE2",
+            "type": "WATCHING"
+        }
+    }
+]

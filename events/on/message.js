@@ -18,7 +18,7 @@ module.exports = async (client, message) => {
             return
         }
 
-        if (!message.guild.me.hasPermission(commands[cmd].config.permMember) ) {
+        if (!message.member.hasPermission(commands[cmd].config.permMember) ) {
             message.channel.send(`**${message.author} tu não tens permição para fazer isso!!**`)
             return
         }

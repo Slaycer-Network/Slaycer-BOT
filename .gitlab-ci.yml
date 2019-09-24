@@ -38,7 +38,7 @@ testando:
   before_script:
     - cp -f $TOKENS data/tokens.json
     - cp -f $RUN test.js
-    - cp -f $CONFIG dada/config.json
+    - cp -f $CONFIG data/config.json
   script:
     - node -v
     - npm -v

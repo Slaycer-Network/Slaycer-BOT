@@ -62,8 +62,10 @@ p1.then(async () => {
     client.dev = config.discord.dev                     //desenvolvedores com permição suprema no bot
     client.db = firebase.database()                     //variavel responsavel pela database
     client.cooldown = new Set()                         //sistema para dar delay nos comandos
+    global.startRun = Date.now()                        //Hora em o bot iniciou
     global.commands = {}                                //varialvel por conter os comandos
     global.CMDs = require("./GlobalFuncions/cmd.js")    //global com funções dos comandos
+    global.up = require("./GlobalFuncions/uptime.js")   //função sobre uptime do bot
 
     //chamar o fs para ler as pastas
     const fs = require('fs')
@@ -74,7 +76,7 @@ p1.then(async () => {
         try {                                               //tenta registrar o comando
             if (file.split('.').slice(-1)[0] === 'js') {    //verifica se o ficheiro encontrado é js
                 const cmd = require(`./commands/${file}`)   //se sim chama o ficheiro
-                await CMDs.register(cmd, file, client.db)         //chama a função dos comandos que registra
+                await CMDs.register(cmd, file, client.db)   //chama a função dos comandos que registra
             }
         } catch (error) { //deu erro dá um aviso aqui
             console.log(`[${tags.ERROR}] Não fui possivel executar o comando ${file}:`)

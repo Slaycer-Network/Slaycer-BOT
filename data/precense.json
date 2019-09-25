@@ -2,14 +2,21 @@
     {
         "status": "online",
         "activity": {
-            "name": "TESTE1",
+            "name": "Pessoas",
+            "type": "LISTENING"
+        }
+    },
+    {
+        "status": "online",
+        "activity": {
+            "name": "Meu prefixo é {prefix}",
             "type": "PLAYING"
         }
     },
     {
         "status": "online",
         "activity": {
-            "name": "TESTE2",
+            "name": "Estou on há {uptime}",
             "type": "WATCHING"
         }
     }

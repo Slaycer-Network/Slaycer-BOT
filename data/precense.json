@@ -9,14 +9,14 @@
     {
         "status": "online",
         "activity": {
-            "name": "Meu prefixo é {prefix}",
+            "name": "Meu prefixo é ${prefix}",
             "type": "PLAYING"
         }
     },
     {
         "status": "online",
         "activity": {
-            "name": "Estou on há {uptime}",
+            "name": "Estou on há ${uptime}",
             "type": "WATCHING"
         }
     }

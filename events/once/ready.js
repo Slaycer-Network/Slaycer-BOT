@@ -5,20 +5,29 @@ const RPCs = require("../../data/precense.json")
 module.exports = async (client) => {
     console.log(`[${tags.SUCCESS}] ${client.user.username} fui iniciado com sucesso!!`)
 
-    async function precence(i) {
-        var RPC = RPCs[i]
+    let u = 0
 
-        RPC.activity.name = await RPC.activity.name.replace("{uptime}", await up.uptime(Date.now()))
-                                                    .replace("{prefix}", client.prefix)
+    let name = []
 
-        await client.user.setPresence(RPC)
-
-        setTimeout(async () => {
-            let u = i + 1
-            if (u >= RPCs.length) u = 0
-            precence(u)
-        }, 30 * 1000)
+    for (let i = 0; i < RPCs.length; i++) {
+        name[i] = RPCs[i].activity.name;
     }
 
-    precence(0)
+    async function precence(i) {
+        let RPC = RPCs[i]
+
+        RPC.activity.name = await name[i].slice().replace("{uptime}", await up.uptime(Date.now()))
+                                                 .replace("{prefix}", client.prefix)
+
+        await client.user.setPresence(RPC)
+    }
+
+    precence(u)
+
+    setInterval(() => {
+        u = u + 1
+        if (u >= RPCs.length) u = 0
+        precence(u)
+    }, 30 * 1000)
+
 }

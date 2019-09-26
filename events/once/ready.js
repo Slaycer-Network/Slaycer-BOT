@@ -1,4 +1,4 @@
-/*global tags*/
+/*global tags, up*/
 /*eslint no-undef: "error"*/
 const RPCs = require("../../data/precense.json")
 
@@ -6,10 +6,12 @@ module.exports = async (client) => {
     console.log(`[${tags.SUCCESS}] ${client.user.username} fui iniciado com sucesso!!`)
 
     async function precence(i) {
-        let uptime = await up.uptime
-        let prefix = client.prefix
+        var RPC = RPCs[i]
 
-        await client.user.setPresence(RPCs[i])
+        RPC.activity.name = await RPC.activity.name.replace("{uptime}", await up.uptime(Date.now()))
+                                                    .replace("{prefix}", client.prefix)
+
+        await client.user.setPresence(RPC)
 
         setTimeout(async () => {
             let u = i + 1

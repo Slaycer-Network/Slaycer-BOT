@@ -12,7 +12,6 @@ module.exports = {
     config: {
         private: false,
         dev: false,
-        cooldown: false,
         permBot: 0,
         permMember: 0
     },

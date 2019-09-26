@@ -49,5 +49,13 @@ module.exports = {
         }
 
         return console.log(`[${tags.SUCCESS}] Comando: ${cmd.help.name} ativado!!`)
+    },
+
+    erro: async (client, message, command, error) => {
+        message.channel.send(`${message.author} algo deu muito errado deu errado!
+                            Descupe pelo inconveniência!! ${error.message}`)
+
+        console.log(`Falha no comando ${command}!!`)
+        console.log(error)
     }
 }

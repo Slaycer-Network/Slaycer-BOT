@@ -6,7 +6,6 @@ yarn-debug.log*
 yarn-error.log*
 
 #not necessary
-package-lock.json
 .theia
 .vscode
 

@@ -1,5 +1,6 @@
 /*global commands*/
 /*eslint no-undef: "error"*/
+var time_cooldown = {}
 module.exports = async (client, message) => {
     if (message.author.bot) return
     if (message.channel.type !== "dm") {
@@ -9,30 +10,45 @@ module.exports = async (client, message) => {
             const args = fullCmd
 
             if (!commands[cmd]) return
-
-            if (!message.guild.me.permissionsIn(message.channel).has(2048)) {
-                await message.author.send('Não tenho permição para falar no canal que executou o comando')
-                    .catch(async () => {return})
+            if (client.cooldown.has(message.author.id)) {
+                message.channel.send(`${message.author}, aguarde \`${time_cooldown[message.author.id]/1000}s\` para utilizar outro comando.`)
                 return
-            }
+            } else {
+                client.cooldown.add(message.author.id)
+                time_cooldown[message.author.id] = 3000
 
-            if (commands[cmd].config.dev && !client.dev.includes(message.author.id)) {
-                await message.channel.send(`**${message.author} você não é desenvolvedor!!**`)
-                return
-            }
+                if (!message.guild.me.permissionsIn(message.channel).has(2048)) {
+                    await message.author.send('Não tenho permição para falar no canal que executou o comando')
+                        .catch(async () => {return})
+                    return
+                }
 
-            if (!message.guild.me.hasPermission(commands[cmd].config.permaBot)) {
-                await message.channel.send(`**${message.author} eu não tenho permição para fazer isso!!**`)
-                return
-            }
+                if (commands[cmd].config.dev && !client.dev.includes(message.author.id)) {
+                    await message.channel.send(`**${message.author} você não é desenvolvedor!!**`)
+                    return
+                }
 
-            if (!message.member.hasPermission(commands[cmd].config.permMember) ) {
-                await message.channel.send(`**${message.author} tu não tens permição para fazer isso!!**`)
-                return
-            }
+                if (!message.guild.me.hasPermission(commands[cmd].config.permaBot)) {
+                    await message.channel.send(`**${message.author} eu não tenho permição para fazer isso!!**`)
+                    return
+                }
 
-            message.channel.startTyping(5)
-            commands[cmd].run(client, message, args)
+                if (!message.member.hasPermission(commands[cmd].config.permMember) ) {
+                    await message.channel.send(`**${message.author} tu não tens permição para fazer isso!!**`)
+                    return
+                }
+
+                message.channel.startTyping(5)
+                commands[cmd].run(client, message, args)
+
+                var time = setInterval(() => {
+                    time_cooldown[message.author.id] = time_cooldown[message.author.id] - 1
+                    if (time_cooldown[message.author.id] <= 0) {
+                        client.cooldown.delete(message.author.id)
+                        clearInterval(time)
+                    }
+                }, 1)
+            }
         }
     }
 }

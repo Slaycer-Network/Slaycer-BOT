@@ -31,6 +31,7 @@ module.exports = async (client, message) => {
                 return
             }
 
+            message.channel.startTyping(5)
             commands[cmd].run(client, message, args)
         }
     }

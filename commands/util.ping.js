@@ -30,6 +30,8 @@ module.exports = {
             m.edit(`${message.author}`, embed)
         } catch (error) {
             CMDs.erro(client, message, this.help.name, error)
+        } finally {
+            message.channel.stopTyping(true)
         }
     }
 }

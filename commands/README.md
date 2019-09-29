@@ -33,8 +33,10 @@ module.exports = {
             /*
                 Codigo do comando
                                     */
-        } catch (error) {
+        } catch (error) { //se deu erro no codigo executa isso
             CMDs.erro(client, message, this.help.name, error)
+        } finally { //quando terminar a função (não importa se deu erro)
+            message.channel.stopTyping(true)
         }
     }
 }

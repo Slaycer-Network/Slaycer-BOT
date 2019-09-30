@@ -1,6 +1,6 @@
 /*global commands*/
 /*eslint no-undef: "error"*/
-var time_cooldown = {}
+var timeCooldown = {}
 module.exports = async (client, message) => {
     if (message.author.bot) return
     if (message.channel.type !== "dm") {
@@ -11,11 +11,11 @@ module.exports = async (client, message) => {
 
             if (!commands[cmd]) return
             if (client.cooldown.has(message.author.id)) {
-                message.channel.send(`${message.author}, aguarde \`${time_cooldown[message.author.id]/1000}s\` para utilizar outro comando.`)
+                message.channel.send(`${message.author}, aguarde \`${timeCooldown[message.author.id]/1000}s\` para utilizar outro comando.`)
                 return
             } else {
                 client.cooldown.add(message.author.id)
-                time_cooldown[message.author.id] = 3000
+                timeCooldown[message.author.id] = 3000
 
                 if (!message.guild.me.permissionsIn(message.channel).has(2048)) {
                     await message.author.send('Não tenho permição para falar no canal que executou o comando')
@@ -42,8 +42,8 @@ module.exports = async (client, message) => {
                 commands[cmd].run(client, message, args)
 
                 var time = setInterval(() => {
-                    time_cooldown[message.author.id] = time_cooldown[message.author.id] - 1
-                    if (time_cooldown[message.author.id] <= 0) {
+                    timeCooldown[message.author.id] = timeCooldown[message.author.id] - 1
+                    if (timeCooldown[message.author.id] <= 0) {
                         client.cooldown.delete(message.author.id)
                         clearInterval(time)
                     }

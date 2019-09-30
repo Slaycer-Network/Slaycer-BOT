@@ -52,8 +52,7 @@ module.exports = {
     },
 
     erro: async (client, message, command, error) => {
-        message.channel.send(`${message.author} algo deu muito errado deu errado!
-                            Descupe pelo inconveniência!! ${error.message}`)
+        message.channel.send(`${message.author} algo deu muito errado deu errado!\nDescupe pelo inconveniência!! \`${error.message}\``)
 
         console.log(`Falha no comando ${command}!!`)
         console.log(error)

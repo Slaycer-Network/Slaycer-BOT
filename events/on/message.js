@@ -39,7 +39,7 @@ module.exports = async (client, message) => {
                 }
 
                 message.channel.startTyping(5)
-                commands[cmd].run(client, message, args)
+                commands[cmd].run(client, message, args, cmd)
 
                 var time = setInterval(() => {
                     timeCooldown[message.author.id] = timeCooldown[message.author.id] - 1

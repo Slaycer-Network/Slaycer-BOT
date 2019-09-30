@@ -18,7 +18,7 @@ module.exports = {
     },
 
     // eslint-disable-next-line no-unused-vars
-    run: async (client, message, args) => {
+    run: async (client, message, args, cmd) => {
         try {
             let User = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]))
             if(!User) User = message.guild.member(message.author.id)
@@ -41,7 +41,7 @@ module.exports = {
 
             message.reply(embed)
         } catch (error) {
-            CMDs.erro(client, message, this.help.name, error)
+            CMDs.erro(client, message, cmd, error)
         } finally {
             message.channel.stopTyping(true)
         }

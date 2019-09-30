@@ -17,7 +17,7 @@ module.exports = {
     },
 
     // eslint-disable-next-line no-unused-vars
-    run: async (client, message, args) => {
+    run: async (client, message, args, cmd) => {
         try {
             if (!radios[args[0]]) {
                 return
@@ -28,7 +28,7 @@ module.exports = {
             console.log(API.data.split("£").slice(1,5))
 
         } catch (error) {
-            CMDs.erro(client, message, this.help.name, error)
+            CMDs.erro(client, message, cmd, error)
         } finally {
             message.channel.stopTyping(true)
         }

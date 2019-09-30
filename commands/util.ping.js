@@ -17,7 +17,7 @@ module.exports = {
     },
 
     // eslint-disable-next-line no-unused-vars
-    run: async (client, message, args) => {
+    run: async (client, message, args, cmd) => {
         try {
             const m = await message.channel.send("Ping?")
 
@@ -29,7 +29,7 @@ module.exports = {
 
             m.edit(`${message.author}`, embed)
         } catch (error) {
-            CMDs.erro(client, message, this.help.name, error)
+            CMDs.erro(client, message, cmd, error)
         } finally {
             message.channel.stopTyping(true)
         }

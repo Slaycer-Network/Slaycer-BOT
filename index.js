@@ -66,6 +66,7 @@ p1.then(async () => {
     global.commands = {}                                //varialvel por conter os comandos
     global.CMDs = require("./GlobalFuncions/cmd.js")    //global com funções dos comandos
     global.up = require("./GlobalFuncions/uptime.js")   //função sobre uptime do bot
+    global.playingNow = {}
 
     //chamar o fs para ler as pastas
     const fs = require('fs')

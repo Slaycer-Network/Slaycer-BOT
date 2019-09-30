@@ -1,0 +1,11 @@
+{
+    "rfm": {
+        "name": "RFM - Só Grandes Musicas",
+        "language": "pt-pt",
+        "link": "https://19573.live.streamtheworld.com/RFMAAC.aac",
+        "api": {
+            "type":"ajax1",
+            "link":"https://rfm.sapo.pt/ajax/emissao/info_emissaoRFM.aspx"
+        }
+    }
+}

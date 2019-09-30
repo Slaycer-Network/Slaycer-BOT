@@ -1,3 +1,6 @@
+/*global CMDs*/
+/*eslint no-undef: "error"*/
+
 const moment = require('moment-timezone')
 const Discord = require('discord.js')
 

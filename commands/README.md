@@ -28,13 +28,13 @@ module.exports = {
     },
 
     //função executada quando comando é adicionado
-    run: async (client, message, args) => {
+    run: async (client, message, args, cmd) => {
         try {
             /*
                 Codigo do comando
                                     */
         } catch (error) { //se deu erro no codigo executa isso
-            CMDs.erro(client, message, this.help.name, error)
+            CMDs.erro(client, message, cmd, error)
         } finally { //quando terminar a função (não importa se deu erro)
             message.channel.stopTyping(true)
         }

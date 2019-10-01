@@ -31,6 +31,6 @@
     "ytdl-core-discord": "^1.0.3"
   },
   "devDependencies": {
-    "eslint": "^6.5.0"
+    "eslint": "^6.5.1"
   }
 }

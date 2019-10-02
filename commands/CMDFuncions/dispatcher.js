@@ -1,10 +1,19 @@
+/*global played*/
+/*eslint no-undef: "error"*/
 module.exports = {
     playRadio: async (client, message, playNow ,connection, dispatcher) => {
-        const play = await connection.play(playNow.data.link)
+        played[message.guild.id] = await connection.play(playNow.data.link)
 
-        dispatcher.events(play, client, message, connection)
+        dispatcher.events(played[message.guild.id], client, message, connection, playNow)
     },
-    events: async (play, client, message, connection) => {
-
+    playYouTube: async () => {},
+    events: async (play, client, message, connection, playNow) => {
+        play.on('finish', async () => {
+            if (playNow.type === "radio") {
+                connection.disconnect()
+            } else {
+                console.log("WIP")
+            }
+        })
     }
 }

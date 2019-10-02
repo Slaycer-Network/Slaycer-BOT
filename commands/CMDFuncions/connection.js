@@ -1,4 +1,4 @@
-/*global CMDs, playingNow, cnt*/
+/*global playingNow, cnt*/
 /*eslint no-undef: "error"*/
 
 module.exports = {
@@ -14,7 +14,8 @@ module.exports = {
                 return
             }
 
-            return cnt[message.guild.id] = await channelvoice.join()
+            // eslint-disable-next-line require-atomic-updates
+            cnt[message.guild.id] = await channelvoice.join()
                 .then(async (connection) => {
                     await connection.voice.setSelfDeaf(true)
                     connect.events(connection, client, message)
@@ -23,9 +24,9 @@ module.exports = {
         } else if (message.member.voice.channel !== message.guild.me.voice.channel) {
             message.reply('você tem de estar no mesmo canal do  que eu!!')
             return
-        } else {
-            return cnt[message.guild.id]
         }
+        
+        return cnt[message.guild.id]
     },
     // eslint-disable-next-line no-unused-vars
     events: async (connection, client, message) => {

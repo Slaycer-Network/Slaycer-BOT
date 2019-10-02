@@ -2,6 +2,8 @@
 /*eslint no-undef: "error"*/
 const radios = require("../data/radio.json")
 const playing = require("./CMDFuncions/playing.js")
+const connect = require("./CMDFuncions/connection.js")
+const dispatcher = require("./CMDFuncions/dispatcher.js")
 
 module.exports = {
     help: {
@@ -25,12 +27,17 @@ module.exports = {
             if (!radios[args[0]]) {
                 return
             }
-            
+
+            const connection = await connect.connect(client, message, connect)
+            if (!connection) return
+
             playingNow[message.guild.id] = {
                 mode: playing.radio,
                 data: radios[args[0]],
                 dj: message.author
             }
+
+            await dispatcher.playRadio(client, message, playingNow[message.guild.id] ,connection, dispatcher)
 
             message.reply(await playingNow[message.guild.id].mode(message.guild.id))
         } catch (error) {

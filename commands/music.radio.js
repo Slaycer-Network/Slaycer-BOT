@@ -8,7 +8,7 @@ const dispatcher = require("./CMDFuncions/dispatcher.js")
 module.exports = {
     help: {
         name: "radio",
-        description: "Latencia de respostas do bot!!"
+        description: "Ouvir uma tramição de radio"
     },
 
     config: {
@@ -32,6 +32,7 @@ module.exports = {
             if (!connection) return
 
             playingNow[message.guild.id] = {
+                type: "radio",
                 mode: playing.radio,
                 data: radios[args[0]],
                 dj: message.author

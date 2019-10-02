@@ -68,6 +68,7 @@ p1.then(async () => {
     global.up = require("./GlobalFuncions/uptime.js")   //função sobre uptime do bot
     global.playingNow = {}
     global.cnt = {}
+    global.played = {}
 
     //chamar o fs para ler as pastas
     const fs = require('fs')

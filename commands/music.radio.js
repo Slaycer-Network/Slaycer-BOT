@@ -22,9 +22,18 @@ module.exports = {
     run: async (client, message, args, cmd) => {
         try {
             if (!args[0]) {
+                let list = []
+
+                for (let i in radios) {
+                    list.push(`${radios[i].name}\n>>>>> ${client.prefix}${cmd} ${i}`)
+                }
+
+                message.channel.send(`${message.author} radio disponiveis:\n\`\`\`\n${list.join(`\n`)}\n\`\`\``)
+
                 return
             }
             if (!radios[args[0]]) {
+                message.channel.send(`${message.author} essa radio é desconhecida!!`)
                 return
             }
 

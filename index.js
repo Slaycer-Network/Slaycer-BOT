@@ -62,6 +62,7 @@ p1.then(async () => {
     client.dev = config.discord.dev                     //desenvolvedores com permição suprema no bot
     client.db = firebase.database()                     //variavel responsavel pela database
     client.cooldown = new Set()                         //sistema para dar delay nos comandos
+    client.ytAPI = tokens.youtube.API
     global.startRun = Date.now()                        //Hora em o bot iniciou
     global.commands = {}                                //varialvel por conter os comandos
     global.CMDs = require("./GlobalFuncions/cmd.js")    //global com funções dos comandos
@@ -69,6 +70,7 @@ p1.then(async () => {
     global.playingNow = {}
     global.cnt = {}
     global.played = {}
+    global.playList = {}
 
     //chamar o fs para ler as pastas
     const fs = require('fs')

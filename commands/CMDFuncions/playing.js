@@ -6,7 +6,7 @@ const Discord = require("discord.js")
 module.exports = {
     radio: async (guild) => {
         const embed = new Discord.MessageEmbed()
-            .setTitle("🎵 Tocando")
+            .setTitle("🎵 Tocando - Radio")
             .setDescription(`[${playingNow[guild].data.name}](${playingNow[guild].data.homepage})`)
             .setFooter(`DJ: ${playingNow[guild].dj.tag}`, playingNow[guild].dj.displayAvatarURL())
 
@@ -29,7 +29,13 @@ module.exports = {
 
         return await type(playingNow[guild].data.api.type)
     },
-    youtube: async () => {
+    youtubeFist: async (guild) => {
+        const embed = new Discord.MessageEmbed()
+            .setTitle("🎵 Tocando - Youtube")
+            .setDescription(`[${playingNow[guild].data.title}](${`https://youtu.be/${await playingNow[guild].data.id}`})`)
+            .setFooter(`DJ: ${playingNow[guild].dj.tag}`, playingNow[guild].dj.displayAvatarURL())
+            .setThumbnail(playingNow[guild].data.thumbnails.high.url)
 
+        return embed
     }
 }

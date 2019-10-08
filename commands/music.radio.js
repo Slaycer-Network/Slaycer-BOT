@@ -47,7 +47,7 @@ module.exports = {
                 dj: message.author
             }
 
-            await dispatcher.playRadio(client, message, playingNow[message.guild.id] ,connection, dispatcher)
+            await dispatcher.playRadio(client, message, playingNow[message.guild.id] ,connection, dispatcher, playing)
 
             message.reply(await playingNow[message.guild.id].mode(message.guild.id))
         } catch (error) {

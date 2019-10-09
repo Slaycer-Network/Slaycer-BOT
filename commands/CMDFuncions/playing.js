@@ -1,4 +1,4 @@
-/*global playingNow*/
+/*global playingNow, playList*/
 /*eslint no-undef: "error"*/
 const axios = require('axios')
 const Discord = require("discord.js")
@@ -29,12 +29,23 @@ module.exports = {
 
         return await type(playingNow[guild].data.api.type)
     },
+
     youtubeFist: async (guild) => {
         const embed = new Discord.MessageEmbed()
             .setTitle("🎵 Tocando - Youtube")
             .setDescription(`[${playingNow[guild].data.title}](${`https://youtu.be/${await playingNow[guild].data.id}`})`)
             .setFooter(`DJ: ${playingNow[guild].dj.tag}`, playingNow[guild].dj.displayAvatarURL())
             .setThumbnail(playingNow[guild].data.thumbnails.high.url)
+
+        return embed
+    },
+
+    youtubeAdd: async (guild) => {
+        const embed = new Discord.MessageEmbed()
+            .setTitle("🎵 Tocando - Youtube")
+            .setDescription(`[${playList[guild][0].data.title}](${`https://youtu.be/${await playingNow[guild].data.id}`})`)
+            .setFooter(`DJ: ${playList[guild][0].dj.tag}`, playingNow[guild].dj.displayAvatarURL())
+            .setThumbnail(playList[guild][0].data.thumbnails.high.url)
 
         return embed
     }

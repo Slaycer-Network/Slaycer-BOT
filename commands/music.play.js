@@ -68,6 +68,7 @@ module.exports = {
                     data: results[0],
                     dj: message.author
                 })
+                message.reply(await playing.youtubeAdd(message.guild.id))
             }
         } catch (error) {
             CMDs.erro(client, message, cmd, error)

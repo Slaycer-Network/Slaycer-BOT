@@ -42,10 +42,10 @@ module.exports = {
 
     youtubeAdd: async (guild) => {
         const embed = new Discord.MessageEmbed()
-            .setTitle("🎵 Tocando - Youtube")
-            .setDescription(`[${playList[guild][0].data.title}](${`https://youtu.be/${await playingNow[guild].data.id}`})`)
-            .setFooter(`DJ: ${playList[guild][0].dj.tag}`, playingNow[guild].dj.displayAvatarURL())
-            .setThumbnail(playList[guild][0].data.thumbnails.high.url)
+            .setTitle("🎵 Adicionado na lista")
+            .setDescription(`[${playList[guild][playList[guild].length - 1].data.title}](${`https://youtu.be/${await playingNow[guild].data.id}`})`)
+            .setFooter(`DJ: ${playList[guild][playList[guild].length - 1].dj.tag}`, playingNow[guild].dj.displayAvatarURL())
+            .setThumbnail(playList[guild][playList[guild].length - 1].data.thumbnails.high.url)
 
         return embed
     }

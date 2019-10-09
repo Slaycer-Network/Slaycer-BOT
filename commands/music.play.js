@@ -47,7 +47,6 @@ module.exports = {
                 message.channel.send(`${message.author} o seu video tem mais de 2 horas de reprodução, por esse motivo fui bloqueado!`)
                 return
             }
-            //console.log(await ytdl.getBasicInfo(`https://youtu.be/${await results[0].id}`))
 
             const connection = await connect.connect(client, message, connect)
             if (!connection) return

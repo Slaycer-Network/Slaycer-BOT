@@ -4,6 +4,7 @@ const playing = require("./CMDFuncions/playing.js")
 const connect = require("./CMDFuncions/connection.js")
 const dispatcher = require("./CMDFuncions/dispatcher.js")
 const YouTube = require("simple-youtube-api")
+const ytdl = require("ytdl-core")
 
 module.exports = {
     help: {
@@ -34,6 +35,19 @@ module.exports = {
                 message.channel.send(`${message.author} parece que essa musica não está diponivel na região que estou!!`)
                 return
             }
+
+            let data = await ytdl.getBasicInfo(`https://youtu.be/${await results[0].id}`)
+
+            if (data.status !== "ok") {
+                message.channel.send(`${message.author} parece que estou tendo problemas com o youtube desculpe!!`)
+                return
+            }
+
+            if (data.player_response.videoDetails.lengthSeconds > 7200) {
+                message.channel.send(`${message.author} o seu video tem mais de 2 horas de reprodução, por esse motivo fui bloqueado!`)
+                return
+            }
+            //console.log(await ytdl.getBasicInfo(`https://youtu.be/${await results[0].id}`))
 
             const connection = await connect.connect(client, message, connect)
             if (!connection) return

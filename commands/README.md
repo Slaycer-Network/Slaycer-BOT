@@ -16,6 +16,7 @@ module.exports = {
     //informações que informações do comando
     help: {
         name: "/* Nome do comando aqui */",
+        aliases: ["x1", "x2"], //alternativas para ativar o comando ("x1" e "x2" são exemplos)
         description: "/* Descrição que o comando */"
     },
 
@@ -23,7 +24,7 @@ module.exports = {
     config: {
         private: false,  //se o comando fica escondido ou não do help
         dev: false,      //se o comando é só para desenvolvedor
-        permBot: 0,      //permissões necessárias para o bot 
+        permBot: 0,      //permissões necessárias para o bot
         permMember: 0    //permissões necessárias para o membro
     },
 

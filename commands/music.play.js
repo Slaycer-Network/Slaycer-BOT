@@ -9,6 +9,7 @@ const ytdl = require("ytdl-core")
 module.exports = {
     help: {
         name: "play",
+        aliases: ["tocar"],
         description: "Tocar musicas do youtube"
     },
 
@@ -61,7 +62,7 @@ module.exports = {
                 })
 
                 await dispatcher.playYouTube(client, message, connection, dispatcher, playing)
-                
+
                 message.reply(await playingNow[message.guild.id].mode(message.guild.id))
             } else  {
                 playList[message.guild.id].push({

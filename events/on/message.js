@@ -1,4 +1,4 @@
-/*global commands*/
+/*global commands, aliases*/
 /*eslint no-undef: "error"*/
 var timeCooldown = {}
 module.exports = async (client, message) => {
@@ -15,10 +15,13 @@ module.exports = async (client, message) => {
         }
         if (message.content.startsWith(client.prefix)) {
             const fullCmd = message.content.replace(client.prefix, '').split(' ')
-            const cmd = fullCmd.shift()
+            let cmd = fullCmd.shift()
             const args = fullCmd
 
-            if (!commands[cmd]) return
+            if (!commands[cmd]) {
+                if (!aliases.get(cmd)) return
+                else cmd = aliases.get(cmd)
+            }
             if (client.cooldown.has(message.author.id)) {
                 message.channel.send(`${message.author}, aguarde \`${timeCooldown[message.author.id]/1000}s\` para utilizar outro comando.`)
                 return

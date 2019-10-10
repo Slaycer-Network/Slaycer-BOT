@@ -8,6 +8,7 @@ const dispatcher = require("./CMDFuncions/dispatcher.js")
 module.exports = {
     help: {
         name: "radio",
+        aliases: ["fm"],
         description: "Ouvir uma tramição de radio"
     },
 

@@ -1,4 +1,4 @@
-/*global tags, commands*/
+/*global tags, commands, aliases*/
 /*eslint no-undef: "error"*/
 
 module.exports = {
@@ -46,6 +46,10 @@ module.exports = {
                 ativate: data.ativate,
                 reason: data.reason
             }
+        }
+
+        for (let i in cmd.help.aliases) {
+            aliases.set(cmd.help.aliases[i], cmd.help.name)
         }
 
         return console.log(`[${tags.SUCCESS}] Comando: ${cmd.help.name} ativado!!`)

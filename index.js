@@ -65,6 +65,7 @@ p1.then(async () => {
     client.ytAPI = tokens.youtube.API
     global.startRun = Date.now()                        //Hora em o bot iniciou
     global.commands = {}                                //varialvel por conter os comandos
+    global.aliases = new Map()
     global.CMDs = require("./GlobalFuncions/cmd.js")    //global com funções dos comandos
     global.up = require("./GlobalFuncions/uptime.js")   //função sobre uptime do bot
     global.playingNow = {}

@@ -6,6 +6,7 @@ const Discord = require("discord.js")
 module.exports = {
     help: {
         name: "ping",
+        aliases: [],
         description: "Latencia de respostas do bot!!"
     },
 

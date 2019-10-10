@@ -7,6 +7,7 @@ const Discord = require('discord.js')
 module.exports = {
     help: {
         name: "userinfo",
+        aliases: ["ui"],
         description: "Informações sobre de uma pessoa da guild"
     },
 

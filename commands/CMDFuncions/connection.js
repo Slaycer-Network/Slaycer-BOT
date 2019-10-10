@@ -1,4 +1,4 @@
-/*global playingNow, cnt*/
+/*global playingNow, cnt, playList*/
 /*eslint no-undef: "error"*/
 
 module.exports = {
@@ -32,6 +32,7 @@ module.exports = {
     events: async (connection, client, message) => {
         connection.on("disconnect", () => {
             playingNow[message.guild.id] = {}
+            playList[message.guild.id] = []
         })
     }
 }

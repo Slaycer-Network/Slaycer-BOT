@@ -5,6 +5,7 @@ const ytdl = require("ytdl-core")
 module.exports = {
     playRadio: async (client, message, playNow, connection, dispatcher, playing) => {
         played[message.guild.id] = await connection.play(playNow.data.link, {
+            highWaterMark: 512,
             bitrate: 'auto'
         })
 
@@ -22,6 +23,7 @@ module.exports = {
         let url = `https://youtu.be/${await playingNow[message.guild.id].data.id}`
 
         played[message.guild.id] = await connection.play(ytdl(url, { filter: 'audioonly' }), {
+            highWaterMark: 512,
             bitrate: 'auto'
         })
 

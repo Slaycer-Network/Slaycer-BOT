@@ -1,4 +1,4 @@
-/*global playingNow, cnt, playList*/
+/*global cnt, playList, played*/
 /*eslint no-undef: "error"*/
 
 module.exports = {
@@ -25,14 +25,14 @@ module.exports = {
             message.reply('você tem de estar no mesmo canal do  que eu!!')
             return
         }
-        
+
         return cnt[message.guild.id]
     },
     // eslint-disable-next-line no-unused-vars
     events: async (connection, client, message) => {
         connection.on("disconnect", () => {
-            playingNow[message.guild.id] = {}
             playList[message.guild.id] = []
+            played[message.guild.id].emit('finish')
         })
     }
 }

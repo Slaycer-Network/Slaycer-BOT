@@ -32,9 +32,15 @@ module.exports = {
     events: async (connection, client, message) => {
         connection.on("disconnect", () => {
             if (playingNow[message.guild.id] && playingNow[message.guild.id].type === "youtube") {
-                playList[message.guild.id] = []
+                playList[message.guild.id].splice(0)
             }
-            played[message.guild.id].emit('finish')
+            playingNow[message.guild.id] = {}
+            played[message.guild.id].destroy()
+        })
+        
+        connection.on("error", async (error) => {
+            message.channel.send(`${message.author} por algum motivo tive um problema de conectar o canal de voz!! ${error}`)
+            console.log(error)
         })
     }
 }

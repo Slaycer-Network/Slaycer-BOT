@@ -43,7 +43,7 @@ module.exports = {
 
             // eslint-disable-next-line require-atomic-updates
             if (playingNow[message.guild.id] && playingNow[message.guild.id].type === "youtube") {
-                playList[message.guild.id] = []
+                playList[message.guild.id].splice(0)
             }
 
             playingNow[message.guild.id] = {

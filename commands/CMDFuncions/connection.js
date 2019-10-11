@@ -1,4 +1,4 @@
-/*global cnt, playList, played*/
+/*global cnt, playList, played, playingNow*/
 /*eslint no-undef: "error"*/
 
 module.exports = {
@@ -31,7 +31,9 @@ module.exports = {
     // eslint-disable-next-line no-unused-vars
     events: async (connection, client, message) => {
         connection.on("disconnect", () => {
-            playList[message.guild.id] = []
+            if (playingNow[message.guild.id].type === "youtube") {
+                playList[message.guild.id] = []
+            }
             played[message.guild.id].emit('finish')
         })
     }

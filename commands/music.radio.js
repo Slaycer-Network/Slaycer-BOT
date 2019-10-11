@@ -1,4 +1,4 @@
-/*global CMDs, playingNow*/
+/*global CMDs, playingNow, playList*/
 /*eslint no-undef: "error"*/
 const radios = require("../data/radio.json")
 const playing = require("./CMDFuncions/playing.js")
@@ -40,6 +40,11 @@ module.exports = {
 
             const connection = await connect.connect(client, message, connect)
             if (!connection) return
+
+            // eslint-disable-next-line require-atomic-updates
+            if (playingNow[message.guild.id] && playingNow[message.guild.id].type === "youtube") {
+                playList[message.guild.id] = []
+            }
 
             playingNow[message.guild.id] = {
                 type: "radio",

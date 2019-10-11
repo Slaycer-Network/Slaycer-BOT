@@ -31,7 +31,7 @@ module.exports = {
     // eslint-disable-next-line no-unused-vars
     events: async (connection, client, message) => {
         connection.on("disconnect", () => {
-            if (playingNow[message.guild.id].type === "youtube") {
+            if (playingNow[message.guild.id] && playingNow[message.guild.id].type === "youtube") {
                 playList[message.guild.id] = []
             }
             played[message.guild.id].emit('finish')

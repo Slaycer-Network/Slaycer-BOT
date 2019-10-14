@@ -5,11 +5,7 @@ module.exports = async (client, message) => {
     if (message.author.bot) return
     if (message.channel.type !== "dm") {
         if (message.content === `${client.user}`) {
-            if (!message.guild.me.permissionsIn(message.channel).has(2048)) {
-                await message.author.send('Não tenho permição para falar no canal que executou o comando')
-                    .catch(async () => {return})
-                return
-            }
+            if (!message.guild.me.permissionsIn(message.channel).has(2048)) return
             message.channel.send(`Olá ${message.author} eu sou o ${client.user} e o meu prefixo é \`${client.prefix}\``)
             return
         }

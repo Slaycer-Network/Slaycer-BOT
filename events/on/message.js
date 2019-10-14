@@ -37,12 +37,14 @@ module.exports = async (client, message) => {
                 }
 
                 if (!message.guild.me.hasPermission(commands[cmd].config.permBot)) {
-                    await message.channel.send(`**${message.author} eu não tenho permição de \`${missPerm}\` para fazer isso!!**`)
+                    let missPerm = await message.guild.me.permissions.missing(commands[cmd].config.permBot).join(", ")
+                    await message.channel.send(`**${message.author} eu não tenho permição de** \`${missPerm}\` **neste servidor para fazer isso!!**`)
                     return
                 }
 
-                if (!message.member.hasPermission(commands[cmd].config.permMember) ) {
-                    await message.channel.send(`**${message.author} tu não tens permição para fazer isso!!**`)
+                if (!message.member.hasPermission(commands[cmd].config.permMember)) {
+                    let missPerm = await message.member.permissions.missing(commands[cmd].config.permMember).join(", ")
+                    await message.channel.send(`**${message.author} tu não tens permição de** \`${missPerm}\` **neste servidor para fazer isso!!**`)
                     return
                 }
 

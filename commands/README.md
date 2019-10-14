@@ -22,10 +22,12 @@ module.exports = {
 
     //configurações do comando
     config: {
-        private: false,  //se o comando fica escondido ou não do help
-        dev: false,      //se o comando é só para desenvolvedor
-        permBot: 0,      //permissões necessárias para o bot
-        permMember: 0    //permissões necessárias para o membro
+        private: false,         //se o comando fica escondido ou não do help
+        dev: false,             //se o comando é só para desenvolvedor
+        permBot: 0,             //permissões do servidor necessárias para o bot
+        permMember: 0,          //permissões do servidor necessárias para o membro
+        permBotChannel: 0,      //permissões do canal necessárias para o bot
+        permMemberChannel: 0    //permissões do canal necessárias para o membro
     },
 
     //função executada quando comando é adicionado

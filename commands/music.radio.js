@@ -41,8 +41,8 @@ module.exports = {
             const connection = await connect.connect(client, message, connect)
             if (!connection) return
 
-            // eslint-disable-next-line require-atomic-updates
             if (playingNow[message.guild.id] && playingNow[message.guild.id].type === "youtube") {
+                message.channel.send(`${message.author} saindo do sistema do YouTube e passando para modo radio!!`)
                 playList[message.guild.id].splice(0)
             }
 

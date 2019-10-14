@@ -52,6 +52,11 @@ module.exports = {
             const connection = await connect.connect(client, message, connect)
             if (!connection) return
 
+            if (playingNow[message.guild.id] && playingNow[message.guild.id].type === "youtube") {
+                message.channel.send(`${message.author} saindo do modo radio e passando para o sistema do YouTube!!`)
+                playList[message.guild.id].splice(0)
+            }
+
             if (!playList[message.guild.id] || !playList[message.guild.id][0]) {
                 if (!playList[message.guild.id]) {
                     playList[message.guild.id] = []

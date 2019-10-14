@@ -5,11 +5,7 @@ module.exports = async (client, message) => {
     if (message.author.bot) return
     if (message.channel.type !== "dm") {
         if (message.content === `${client.user}`) {
-            if (!message.guild.me.permissionsIn(message.channel).has(2048)) {
-                await message.author.send('Não tenho permição para falar no canal que executou o comando')
-                    .catch(async () => {return})
-                return
-            }
+            if (!message.guild.me.permissionsIn(message.channel).has(2048)) return
             message.channel.send(`Olá ${message.author} eu sou o ${client.user} e o meu prefixo é \`${client.prefix}\``)
             return
         }
@@ -40,13 +36,27 @@ module.exports = async (client, message) => {
                     return
                 }
 
-                if (!message.guild.me.hasPermission(commands[cmd].config.permaBot)) {
-                    await message.channel.send(`**${message.author} eu não tenho permição para fazer isso!!**`)
+                if (!message.guild.me.hasPermission(commands[cmd].config.permBot)) {
+                    let missPerm = await message.guild.me.permissions.missing(commands[cmd].config.permBot).join(", ")
+                    await message.channel.send(`**${message.author} eu não tenho permição de** \`${missPerm}\` **neste servidor para fazer isso!!**`)
                     return
                 }
 
-                if (!message.member.hasPermission(commands[cmd].config.permMember) ) {
-                    await message.channel.send(`**${message.author} tu não tens permição para fazer isso!!**`)
+                if (!message.member.hasPermission(commands[cmd].config.permMember)) {
+                    let missPerm = await message.member.permissions.missing(commands[cmd].config.permMember).join(", ")
+                    await message.channel.send(`**${message.author} tu não tens permição de** \`${missPerm}\` **neste servidor para fazer isso!!**`)
+                    return
+                }
+
+                if (!message.guild.me.permissionsIn(message.channel).has(commands[cmd].config.permBotChannel)) {
+                    let missPerm = await message.guild.me.permissionsIn(message.channel).missing(commands[cmd].config.permBotChannel).join(", ")
+                    await message.channel.send(`**${message.author} eu não tenho permição de** \`${missPerm}\` **neste canal para fazer isso!!**`)
+                    return
+                }
+
+                if (!message.member.permissionsIn(message.channel).has(commands[cmd].config.permMemberChannel)) {
+                    let missPerm = await message.member.permissionsIn(message.channel).missing(commands[cmd].config.permMemberChannel).join(", ")
+                    await message.channel.send(`**${message.author} tu não tens permição de** \`${missPerm}\` **neste canal para fazer isso!!**`)
                     return
                 }
 

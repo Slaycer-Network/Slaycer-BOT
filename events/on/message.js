@@ -48,6 +48,18 @@ module.exports = async (client, message) => {
                     return
                 }
 
+                if (!message.guild.me.permissionsIn(message.channel).has(commands[cmd].config.permBotChannel)) {
+                    let missPerm = await message.guild.me.permissionsIn(message.channel).missing(commands[cmd].config.permBotChannel).join(", ")
+                    await message.channel.send(`**${message.author} eu não tenho permição de** \`${missPerm}\` **neste canal para fazer isso!!**`)
+                    return
+                }
+
+                if (!message.member.permissionsIn(message.channel).has(commands[cmd].config.permMemberChannel)) {
+                    let missPerm = await message.member.permissionsIn(message.channel).missing(commands[cmd].config.permMemberChannel).join(", ")
+                    await message.channel.send(`**${message.author} tu não tens permição de** \`${missPerm}\` **neste canal para fazer isso!!**`)
+                    return
+                }
+
                 message.channel.startTyping(5)
                 commands[cmd].run(client, message, args, cmd)
 

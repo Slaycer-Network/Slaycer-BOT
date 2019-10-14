@@ -16,7 +16,9 @@ module.exports = {
         private: false,
         dev: false,
         permBot: 0,
-        permMember: 0
+        permMember: 0,
+        permBotChannel: 0,
+        permMemberChannel: 0
     },
 
     // eslint-disable-next-line no-unused-vars

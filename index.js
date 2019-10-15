@@ -1,7 +1,7 @@
 const tokens = require("./data/tokens.json")
 const { ShardingManager } = require("discord.js")
 
-const manager = new ShardingManager("./index.js", {
+const manager = new ShardingManager("./bot.js", {
     token: tokens.discord.token
 })
 

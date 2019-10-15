@@ -7,4 +7,10 @@ const manager = new ShardingManager("./bot.js", {
 
 manager.spawn()
 
-manager.on("shardCreate", shard => console.log(`Shard ${shard.id + 1} de ${manager.totalShards} ligado!!`))
+manager.on("shardCreate", async (shard) => {
+    console.log(`Shard ${shard.id + 1} de ${manager.totalShards} ligado!!`)
+
+    shard.on("message", async (message) => {
+        console.log(message)
+    })
+})

@@ -1,4 +1,4 @@
-/*global tags, up*/
+/*global tags, up, bShard*/
 /*eslint no-undef: "error"*/
 const RPCs = require("../../data/precense.json")
 
@@ -18,6 +18,7 @@ module.exports = async (client) => {
 
         RPC.activity.name = await name[i].slice().replace("{uptime}", await up.uptime(Date.now()))
                                                  .replace("{prefix}", client.prefix)
+                                                 .replace("{guilds}", await bShard.guildSize(client.shard))
 
         await client.user.setPresence(RPC)
     }

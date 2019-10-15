@@ -19,5 +19,13 @@
             "name": "Estou on há {uptime}",
             "type": "WATCHING"
         }
+    },
+    {
+        "status": "online",
+        "activity": {
+            "name": "para {guilds} servidores",
+            "type": "STREAMING",
+            "url": "https://www.twitch.tv/smglinuxl2g"
+        }
     }
 ]

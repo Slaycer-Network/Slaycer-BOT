@@ -68,6 +68,7 @@ p1.then(async () => {
     global.aliases = new Map()
     global.CMDs = require("./GlobalFuncions/cmd.js")    //global com funções dos comandos
     global.up = require("./GlobalFuncions/uptime.js")   //função sobre uptime do bot
+    global.bShard = require("./GlobalFuncions/broadcastShard.js")
     global.playingNow = {}
     global.cnt = {}
     global.played = {}

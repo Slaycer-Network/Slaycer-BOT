@@ -1,0 +1,11 @@
+{
+    "shardManager": {
+        "create": "{SM} Ativando shard {shard}/{shardTotal}"
+    },
+    "cmd": {
+
+    },
+    "database": {
+        
+    }
+}

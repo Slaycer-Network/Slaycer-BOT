@@ -1,3 +1,4 @@
+const clc = require("cli-color")
 const tokens = require("./data/tokens.json")
 const { ShardingManager } = require("discord.js")
 
@@ -8,5 +9,9 @@ const manager = new ShardingManager("./bot.js", {
 manager.spawn()
 
 manager.on("shardCreate", async (shard) => {
-    console.log(`Shard ${shard.id + 1} de ${manager.totalShards} ligado!!`)
+    const sm = clc.yellowBright("[ShardingManager]")
+    const sid = clc.cyanBright(`${shard.id + 1}`)
+    const st = clc.cyanBright(`${manager.totalShards}`)
+
+    console.log(`${sm} Ativando shard ${sid}/${st}`)
 })

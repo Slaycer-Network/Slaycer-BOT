@@ -1,4 +1,4 @@
-/*global playingNow*/
+/*global playingNow, CMDs*/
 /*eslint no-undef: "error"*/
 module.exports = {
     help: {

@@ -25,7 +25,6 @@
     "moment": "^2.24.0",
     "moment-timezone": "^0.5.26",
     "node-opus": "^0.3.3",
-    "prism-media": "^1.1.0",
     "simple-youtube-api": "^5.2.1",
     "ytdl-core": "^1.0.0"
   },

@@ -1,4 +1,5 @@
 {
+    "Null": "------!!Mensagem não encontrada!!------",
     "shardManager": {
         "create": "{SM} Ativando shard {shard}/{shardTotal}"
     },
@@ -6,6 +7,6 @@
 
     },
     "database": {
-        
+
     }
 }

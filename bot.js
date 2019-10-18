@@ -5,7 +5,7 @@
 const tokens = require("./data/tokens.json")
 const config = require("./data/config.json")
 const firebase = require("firebase")
-global.tags = require("./data/messages/console/tags.json")
+global.tags = require("./locales/pt/messages/console/tags.json")
 
 //iniciar firebase
 const p1 = new Promise((resolve) => {

@@ -1,6 +1,6 @@
 //locais dos textos
-const mConsole = require("../data/messages/console/mesages.json")
-const tags = require("../data/messages/console/tags.json")
+const mConsole = require("../locales/pt/messages/console/mesages.json")
+const tags = require("../locales/pt/messages/console/tags.json")
 
 //Cores do terminal
 const clc = require("cli-color")

@@ -1,9 +1,35 @@
-/*global tags, CMDs*/
+/*global CMDs*/
 /*eslint no-undef: "error"*/
 
-//chamar os recrimentos globais
 const tokens = require("./data/tokens.json")
 const config = require("./data/config.json")
+const mongoose = require("mongoose")
+
+async function db() {
+    const { connect, auth } = tokens.mongo
+    for (let i in connect) {
+        if (!connect[i]) {
+            console.log("WIP")
+            return process.exit()
+        }
+    }
+    let eAuth = true
+    for (let i in auth) {
+        if (!auth[i]) {
+            console.log("WIP")
+            eAuth = false
+        }
+    }
+    if (eAuth) {
+        mongoose.connect(`mongodb://${auth.user}:${auth.password}@${connect.ip}:${connect.port}/${connect.database}`, {useNewUrlParser: true})
+    } else {
+        mongoose.connect(`mongodb://${connect.ip}:${connect.port}/${connect.database}`, {useNewUrlParser: true})        
+    }
+    
+}
+
+/*//chamar os recrimentos globais
+
 const firebase = require("firebase")
 global.tags = require("./locales/pt/messages/console/tags.json")
 
@@ -115,4 +141,4 @@ p1.then(async () => {
 
     //sistema para que o bot ligue no discord
     client.login(tokens.discord.token)
-})
+})*/

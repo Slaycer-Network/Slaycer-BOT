@@ -23,7 +23,12 @@ module.exports = {
             for (let i = 0; i < args.length; i++) {
                 if (args[i].includes("<") && (args[i].includes(">") && args[i].includes(":"))) {
                     let id = args[i].slice().split(":").slice(-1)[0].split(">")[0]
-                    args[i] = await client.emojis.resolve(id)
+                    let emoji = await client.emojis.resolve(id)
+                    if (emoji) args[i] = emoji
+                } else if (args[i].startsWith(":") && args[i].endsWith(":")) {
+                    let name = args[i].slice().split(":")[1]
+                    let emoji = await client.emojis.filter(g => g.name == name)
+                    if (emoji) args[i] = emoji.first()
                 }
             }
 

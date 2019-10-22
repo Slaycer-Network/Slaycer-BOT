@@ -6,6 +6,7 @@ const config = require("./data/config.json")
 const mongoose = require("mongoose")
 
 async function db() {
+    const { database } = require("./GlobalFuncions/Mconsole.js")
     const { connect, auth } = tokens.mongo
     for (let i in connect) {
         if (!connect[i]) {

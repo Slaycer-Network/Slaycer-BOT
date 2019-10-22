@@ -20,12 +20,17 @@ async function db() {
             eAuth = false
         }
     }
-    if (eAuth) {
-        mongoose.connect(`mongodb://${auth.user}:${auth.password}@${connect.ip}:${connect.port}/${connect.database}`, {useNewUrlParser: true})
-    } else {
-        mongoose.connect(`mongodb://${connect.ip}:${connect.port}/${connect.database}`, {useNewUrlParser: true})        
+
+    try {
+        if (eAuth) {
+            await mongoose.connect(`mongodb://${auth.user}:${auth.password}@${connect.ip}:${connect.port}/${connect.database}`, {useNewUrlParser: true})
+        } else {
+            await mongoose.connect(`mongodb://${connect.ip}:${connect.port}/${connect.database}`, {useNewUrlParser: true})
+        }
+    } catch (error) {
+        console.log("WIP")
+        return process.exit()
     }
-    
 }
 
 /*//chamar os recrimentos globais

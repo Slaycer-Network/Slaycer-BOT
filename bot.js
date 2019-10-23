@@ -1,11 +1,11 @@
-/*global CMDs*/
+/*global CMDs, dbcmd*/
 /*eslint no-undef: "error"*/
 
 const tokens = require("./data/tokens.json")
 const config = require("./data/config.json")
 const mongoose = require("mongoose")
 
-async function db() {
+async function db(shardID) {
     const { database } = require("./GlobalFuncions/Mconsole.js")
     const { connect, auth } = tokens.mongo
     for (let i in connect) {
@@ -40,6 +40,8 @@ async function runDiscord() {
     const Discord = require("discord.js")
     const client = new Discord.Client()
 
+    const { dbCmd } = require("./GlobalFuncions/MongoSchemas/cmd.js")
+
     client.prefix = config.discord.prefix
     client.dev = config.discord.dev
     client.cooldown = new Set()
@@ -56,9 +58,11 @@ async function runDiscord() {
 
     await client.login(tokens.discord.token)
 
-    if (!await db()) return process.exit()
+    if (!(await db(client.shard.id))) return process.exit()
+    global.dbcmd = mongoose.model("commands", dbCmd)
 /*
     Rever esta parte para ver se funciona
+    \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/
 */
     const fs = require('fs')
     const cmdFiles = fs.readdirSync('./commands/')
@@ -66,13 +70,17 @@ async function runDiscord() {
         try {
             if (file.split('.').slice(-1)[0] === 'js') {
                 const cmd = require(`./commands/${file}`)
-                await CMDs.register(cmd, file, mongoose)
+                await CMDs.register(cmd, file, dbcmd)
             }
         } catch (error) {
             console.log(/*`[${tags.ERROR}] Não fui possivel executar o comando ${file}:`*/ "WIP")
             console.log(error)
         }
     })
+/*
+    /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\
+    Rever esta parte para ver se funciona
+*/
     const onFiles = fs.readdirSync('./events/on/')
     onFiles.forEach(async (file) => {
         if (file.split('.').slice(-1)[0] === 'js') {
@@ -81,7 +89,7 @@ async function runDiscord() {
             client.on(onName, run.bind(null, client))
         }
     })
-    
+
     const onceFiles = fs.readdirSync('./events/once/')
     onceFiles.forEach(async (file) => {
         if (file.split('.').slice(-1)[0] === 'js') {

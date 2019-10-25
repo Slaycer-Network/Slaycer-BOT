@@ -1,11 +1,20 @@
-const { Schema } = require("mongoose")
+const { Schema, model } = require("mongoose")
 
 const dbUser = new Schema({
-    id: String,
+    id: {
+        type: String,
+        required: true
+    },
     status: {
-        banned: Boolean,
-        reason: String
+        banned: {
+            type: Boolean,
+            required: true
+        },
+        reason: {
+            type: String,
+            required: false
+        }
     }
 })
 
-module.exports = dbUser
+model("User", dbUser)

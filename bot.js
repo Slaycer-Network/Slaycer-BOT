@@ -24,7 +24,7 @@ async function db(shardID) {
 
     try {
         if (eAuth) {
-            await mongoose.connect(`mongodb://${auth.user}:${auth.password}@${connect.ip}:${connect.port}/${connect.database}`, {useNewUrlParser: true})
+            await mongoose.connect(`mongodb://${auth.user}:${auth.password}@${connect.ip}:${connect.port}/${connect.database}?authSource=admin`, {useNewUrlParser: true})
             return true
         } else {
             await mongoose.connect(`mongodb://${connect.ip}:${connect.port}/${connect.database}`, {useNewUrlParser: true})
@@ -39,8 +39,6 @@ async function db(shardID) {
 async function runDiscord() {
     const Discord = require("discord.js")
     const client = new Discord.Client()
-
-    const { dbCmd } = require("./GlobalFuncions/MongoSchemas/cmd.js")
 
     client.prefix = config.discord.prefix
     client.dev = config.discord.dev
@@ -59,7 +57,9 @@ async function runDiscord() {
     await client.login(tokens.discord.token)
 
     if (!(await db(client.shard.id))) return process.exit()
-    global.dbcmd = mongoose.model("commands", dbCmd)
+    require("./GlobalFuncions/MongoSchemas/cmd.js")
+
+    global.dbcmd = mongoose.model("Commands")
 /*
     Rever esta parte para ver se funciona
     \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/

@@ -1,12 +1,24 @@
-const { Schema } = require("mongoose")
+const { Schema, model } = require("mongoose")
 
 const dbCmd = new Schema({
-    name: String,
-    type: String,
+    name: {
+        type: String,
+        required: true
+    },
+    category: {
+        type: String,
+        required: true
+    },
     status: {
-        ativate: Boolean,
-        reason: String
+        ativate: {
+            type: Boolean,
+            require: true
+        },
+        reason: {
+            type: String,
+            require: false
+        }
     }
 })
 
-module.exports = dbCmd
+model("Commands", dbCmd)

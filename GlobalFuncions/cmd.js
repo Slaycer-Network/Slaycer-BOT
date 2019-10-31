@@ -1,14 +1,17 @@
-/*global commands, aliases*/
+/*global commands, aliases, clcError*/
 /*eslint no-undef: "error"*/
 
+const { database, cmd } = require("./Mconsole.js")
+const mCmd = cmd
+
 module.exports = {
-    register: async (cmd, file, db) => {
+    register: async (cmd, file, db, shardID) => {
         async function verify() {
             try {
                 return await db.findOne({name: file.split('.')[1]})
             } catch (error) {
-                console.log("WIP")
-                console.log(error)
+                console.log(await database("findError", shardID))
+                console.log(await clcError(error))
                 return process.exit()
             }
         }
@@ -24,11 +27,11 @@ module.exports = {
                         ativate: true,
                     }
                 })
-                console.log("WIP")
+                console.log(await mCmd("registred", shardID, file.split('.')[1]))
                 data = await verify()
             } catch (error) {
-                console.log("WIP")
-                console.log(error)
+                console.log(await database("createError", shardID))
+                console.log(await clcError(error))
                 return process.exit()
             }
         }
@@ -48,12 +51,13 @@ module.exports = {
             aliases.set(cmd.help.aliases[i], cmd.help.name)
         }
 
-        return console.log(`WIP`)
+        return console.log(await mCmd("loadSuccess", shardID, cmd.help.name))
     },
 
     erro: async (client, message, command, error) => {
+        let shardID = (client.shard.ids[0] + 1)
         message.channel.send(`${message.author} algo deu muito errado deu errado!\nDescupe pelo inconveniência!! \`${error.message}\``)
-        console.log(`WIP`)
-        console.log(error)
+        console.log(await mCmd("execError", shardID, command))
+        console.log(await clcError(error))
     }
 }

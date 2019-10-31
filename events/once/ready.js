@@ -1,9 +1,10 @@
-/*global tags, up, bShard*/
+/*global up, bShard*/
 /*eslint no-undef: "error"*/
 const RPCs = require("../../data/precense.json")
+const { ready } = require("../../GlobalFuncions/Mconsole.js")
 
 module.exports = async (client) => {
-    console.log(`[${tags.SUCCESS}] ${client.user.username} fui iniciado com sucesso!!`)
+    console.log(await ready(client))
 
     let u = 0
 

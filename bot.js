@@ -1,37 +1,46 @@
-/*global CMDs, dbcmd*/
+/*global CMDs, dbcmd, clcError*/
 /*eslint no-undef: "error"*/
 
 const tokens = require("./data/tokens.json")
 const config = require("./data/config.json")
 const mongoose = require("mongoose")
+const Mconsole = require("./GlobalFuncions/Mconsole.js")
+global.clcError = Mconsole.clcError
 
 async function db(shardID) {
-    const { database } = require("./GlobalFuncions/Mconsole.js")
+    const { database } = Mconsole
     const { connect, auth } = tokens.mongo
     for (let i in connect) {
         if (!connect[i]) {
-            console.log("WIP")
+            console.log(await database("unknownData", shardID))
             return false
         }
     }
     let eAuth = true
     for (let i in auth) {
         if (!auth[i]) {
-            console.log("WIP")
+            console.log(await database("noAuthentication", shardID))
             eAuth = false
         }
     }
 
     try {
         if (eAuth) {
-            await mongoose.connect(`mongodb://${auth.user}:${auth.password}@${connect.ip}:${connect.port}/${connect.database}?authSource=admin`, {useNewUrlParser: true})
-            return true
+            await mongoose.connect(`mongodb://${auth.user}:${auth.password}@${connect.ip}:${connect.port}/${connect.database}?authSource=admin`, {
+                useNewUrlParser: true,
+                useUnifiedTopology: true
+            })
         } else {
-            await mongoose.connect(`mongodb://${connect.ip}:${connect.port}/${connect.database}`, {useNewUrlParser: true})
-            return true
+            await mongoose.connect(`mongodb://${connect.ip}:${connect.port}/${connect.database}`, {
+                useNewUrlParser: true,
+                useUnifiedTopology: true
+            })
         }
+        console.log(await database("authentication", shardID))
+        return true
     } catch (error) {
-        console.log("WIP")
+        console.log(await database("errAuthentication", shardID))
+        console.log(await clcError(error))
         return false
     }
 }
@@ -54,33 +63,27 @@ async function runDiscord() {
     global.played = {}
     global.playList = {}
 
-    await client.login(tokens.discord.token)
-
-    if (!(await db(client.shard.id))) return process.exit()
+    let mdb = await db((client.shard.ids[0] + 1))
+    if (!mdb) return process.exit()
     require("./GlobalFuncions/MongoSchemas/cmd.js")
 
     global.dbcmd = mongoose.model("Commands")
-/*
-    Rever esta parte para ver se funciona
-    \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/
-*/
     const fs = require('fs')
+
     const cmdFiles = fs.readdirSync('./commands/')
+    const { cmd } = Mconsole
     cmdFiles.forEach(async (file) => {
         try {
             if (file.split('.').slice(-1)[0] === 'js') {
                 const cmd = require(`./commands/${file}`)
-                await CMDs.register(cmd, file, dbcmd)
+                await CMDs.register(cmd, file, dbcmd, (client.shard.ids[0] + 1))
             }
         } catch (error) {
-            console.log(/*`[${tags.ERROR}] Não fui possivel executar o comando ${file}:`*/ "WIP")
-            console.log(error)
+            console.log(await cmd("loadError", (client.shard.ids[0] + 1), file.split('.')[1]))
+            console.log(await clcError(error))
         }
     })
-/*
-    /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\
-    Rever esta parte para ver se funciona
-*/
+
     const onFiles = fs.readdirSync('./events/on/')
     onFiles.forEach(async (file) => {
         if (file.split('.').slice(-1)[0] === 'js') {
@@ -98,6 +101,14 @@ async function runDiscord() {
             client.once(onceName, run.bind(null, client))
         }
     })
+
+    try {
+        await client.login(tokens.discord.token)
+    } catch (error) {
+        console(await clcError(error))
+        return process.exit()
+    }
+
 }
 
 runDiscord()

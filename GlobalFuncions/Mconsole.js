@@ -28,13 +28,24 @@ module.exports = {
         const { shardManager } = mConsole
 
         if(!shardManager[name]) return mgsNull
-        else return await colorTags(shardManager[name].slice()).replace("{SM}", yellow("[ShardingManager]"))
-                                                               .replace("{shard}", green(`${shard.id + 1}`))
-                                                               .replace("{shardTotal}", green(`${manager.totalShards}`))
+        else {
+            let frase = await colorTags(shardManager[name].slice())
+            return frase.replace("{SM}", yellow("[ShardingManager]"))
+                        .replace("{shard}", green(`${shard.id + 1}`))
+                        .replace("{shardTotal}", green(`${manager.totalShards}`))
+        } 
     },
 
-    cmd: async (name, shardId) => {
+    cmd: async (name, shardId, command) => {
+        const { cmd } = mConsole
+        let shardTag = clc.cyan(`[Shard-${shardId}]`)
 
+        if (!cmd[name]) return mgsNull
+        else {
+            let frase = await colorTags(cmd[name].slice())
+            let rFrase = await frase.replace("{command}", clc.cyanBright(command))
+            return `${shardTag}${rFrase}`
+        }
     },
 
     database: async (name, shardId) => {
@@ -52,5 +63,17 @@ module.exports = {
         } else {
             return `${shardTag}${await colorTags(database[name].slice())}`
         }
-    }
+    },
+
+    ready: async (client) => {
+        const { ready } = mConsole
+        let frase = await colorTags(ready.slice())
+        let u = await frase.replace("{BotName}", client.user.username)
+        let shardTag = clc.cyan(`[Shard-${client.shard.ids[0] + 1}]`)
+        return `${shardTag}${u}`
+    },
+
+    clcError: async (error) => {
+        return clc.redBright(error)
+    } 
 }

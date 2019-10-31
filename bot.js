@@ -64,6 +64,26 @@ async function runDiscord() {
     global.played = {}
     global.playList = {}
 
+    let mdb = await db((client.shard.ids[0] + 1))
+    if (!mdb) return process.exit()
+    require("./GlobalFuncions/MongoSchemas/cmd.js")
+
+    global.dbcmd = mongoose.model("Commands")
+
+    const cmdFiles = fs.readdirSync('./commands/')
+    const { cmd } = Mconsole
+    cmdFiles.forEach(async (file) => {
+        try {
+            if (file.split('.').slice(-1)[0] === 'js') {
+                const cmd = require(`./commands/${file}`)
+                await CMDs.register(cmd, file, dbcmd, (client.shard.ids[0] + 1))
+            }
+        } catch (error) {
+            console.log(await cmd("loadError", (client.shard.ids[0] + 1), file.split('.')[1]))
+            console.log(await clcError(error))
+        }
+    })
+    
     const onFiles = fs.readdirSync('./events/on/')
     onFiles.forEach(async (file) => {
         if (file.split('.').slice(-1)[0] === 'js') {
@@ -88,26 +108,6 @@ async function runDiscord() {
         console(await clcError(error))
         return process.exit()
     }
-
-    let mdb = await db((client.shard.ids[0] + 1))
-    if (!mdb) return process.exit()
-    require("./GlobalFuncions/MongoSchemas/cmd.js")
-
-    global.dbcmd = mongoose.model("Commands")
-
-    const cmdFiles = fs.readdirSync('./commands/')
-    const { cmd } = Mconsole
-    cmdFiles.forEach(async (file) => {
-        try {
-            if (file.split('.').slice(-1)[0] === 'js') {
-                const cmd = require(`./commands/${file}`)
-                await CMDs.register(cmd, file, dbcmd, (client.shard.ids[0] + 1))
-            }
-        } catch (error) {
-            console.log(await cmd("loadError", (client.shard.ids[0] + 1), file.split('.')[1]))
-            console.log(await clcError(error))
-        }
-    })
 }
 
 runDiscord()

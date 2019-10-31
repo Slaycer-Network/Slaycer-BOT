@@ -5,6 +5,7 @@ const tokens = require("./data/tokens.json")
 const config = require("./data/config.json")
 const mongoose = require("mongoose")
 const Mconsole = require("./GlobalFuncions/Mconsole.js")
+const fs = require('fs')
 global.clcError = Mconsole.clcError
 
 async function db(shardID) {
@@ -93,7 +94,6 @@ async function runDiscord() {
     require("./GlobalFuncions/MongoSchemas/cmd.js")
 
     global.dbcmd = mongoose.model("Commands")
-    const fs = require('fs')
 
     const cmdFiles = fs.readdirSync('./commands/')
     const { cmd } = Mconsole

@@ -52,6 +52,7 @@ async function runDiscord() {
 
     client.prefix = config.discord.prefix
     client.dev = config.discord.dev
+    client.ytAPI = config.youtube.API
     client.cooldown = new Set()
     global.startRun = Date.now()
     global.commands = {}

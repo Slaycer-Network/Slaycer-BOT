@@ -24,10 +24,12 @@ module.exports = {
                 if (args[i].includes("<") && (args[i].includes(">") && args[i].includes(":"))) {
                     let id = args[i].slice().split(":").slice(-1)[0].split(">")[0]
                     let emoji = await client.emojis.resolve(id)
+                    // eslint-disable-next-line require-atomic-updates
                     if (emoji) args[i] = emoji
                 } else if (args[i].startsWith(":") && args[i].endsWith(":")) {
                     let name = args[i].slice().split(":")[1]
                     let emoji = await client.emojis.filter(g => g.name == name)
+                    // eslint-disable-next-line require-atomic-updates
                     if (emoji) args[i] = emoji.first()
                 }
             }

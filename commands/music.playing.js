@@ -20,9 +20,9 @@ module.exports = {
     run: async (client, message, args, cmd) => {
         try {
             if (!playingNow[message.guild.id] || !playingNow[message.guild.id].mode) {
-                message.reply("eu não estou tocando nenhuma musica!!")
+                await message.reply("eu não estou tocando nenhuma musica!!")
             } else {
-                message.reply(await playingNow[message.guild.id].mode(message.guild.id))
+                await message.reply(await playingNow[message.guild.id].mode(message.guild.id))
             }
         } catch (error) {
             CMDs.erro(client, message, cmd, error)

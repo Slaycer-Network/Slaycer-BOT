@@ -34,7 +34,7 @@ module.exports = {
                 }
             }
 
-            message.channel.send(args.join(" "))
+            await message.channel.send(args.join(" "))
         } catch (error) {
             CMDs.erro(client, message, cmd, error)
         } finally {

@@ -26,17 +26,14 @@ module.exports = {
         try {
             if (!args[0]) {
                 let list = []
-
                 for (let i in radios) {
                     list.push(`${radios[i].name}\n>>>>> ${client.prefix}${cmd} ${i}`)
                 }
-
-                message.channel.send(`${message.author} radio disponiveis:\n\`\`\`\n${list.join(`\n`)}\n\`\`\``)
-
+                await message.channel.send(`${message.author} radio disponiveis:\n\`\`\`\n${list.join(`\n`)}\n\`\`\``)
                 return
             }
             if (!radios[args[0]]) {
-                message.channel.send(`${message.author} essa radio é desconhecida!!`)
+                await message.channel.send(`${message.author} essa radio é desconhecida!!`)
                 return
             }
 
@@ -44,10 +41,11 @@ module.exports = {
             if (!connection) return
 
             if (playingNow[message.guild.id] && playingNow[message.guild.id].type === "youtube") {
-                message.channel.send(`${message.author} saindo do sistema do YouTube e passando para modo radio!!`)
+                await message.channel.send(`${message.author} saindo do sistema do YouTube e passando para modo radio!!`)
                 playList[message.guild.id].splice(0)
             }
 
+            // eslint-disable-next-line require-atomic-updates
             playingNow[message.guild.id] = {
                 type: "radio",
                 mode: playing.radio,
@@ -57,7 +55,7 @@ module.exports = {
 
             await dispatcher.playRadio(client, message, playingNow[message.guild.id] ,connection, dispatcher, playing)
 
-            message.reply(await playingNow[message.guild.id].mode(message.guild.id))
+            await message.reply(await playingNow[message.guild.id].mode(message.guild.id))
         } catch (error) {
             CMDs.erro(client, message, cmd, error)
         } finally {

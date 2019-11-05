@@ -42,7 +42,7 @@ module.exports = {
                 .addField(`Conta criada*`, contaCriada, true)
                 .addField(`Entrou no servidor*`, entrouNoServer, true)
 
-            message.reply(embed)
+            await message.reply(embed)
         } catch (error) {
             CMDs.erro(client, message, cmd, error)
         } finally {

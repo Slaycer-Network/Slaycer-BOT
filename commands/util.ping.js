@@ -30,7 +30,7 @@ module.exports = {
                 .addField('⌚ Latência', `${(m.createdTimestamp - message.createdTimestamp)}ms`, true)
                 .addField('⚡ Latencia da API', `${Math.round(client.ws.ping)}ms`, true)
 
-            m.edit(`${message.author}`, embed)
+            await m.edit(`${message.author}`, embed)
         } catch (error) {
             CMDs.erro(client, message, cmd, error)
         } finally {

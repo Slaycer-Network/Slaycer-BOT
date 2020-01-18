@@ -1,4 +1,4 @@
-/*global CMDs, dbcmd, clcError, lavatoken*/
+/*global CMDs, dbcmd, clcError*/
 /*eslint no-undef: "error"*/
 
 const tokens = require("./data/tokens.json")
@@ -53,9 +53,7 @@ async function runDiscord() {
 
     client.prefix = config.discord.prefix
     client.dev = config.discord.dev
-    client.ytAPI = tokens.youtube.API
     client.cooldown = new Set()
-    global.lavatoken = tokens.lavalink
     global.startRun = Date.now()
     global.commands = {}
     global.aliases = new Map()
@@ -63,7 +61,6 @@ async function runDiscord() {
     global.up = require("./GlobalFuncions/uptime.js")
     global.bShard = require("./GlobalFuncions/broadcastShard.js")
     global.playingNow = {}
-    global.cnt = {}
     global.played = {}
     global.playList = {}
 
@@ -112,10 +109,16 @@ async function runDiscord() {
         return process.exit()
     }
 
-    global.lavalink = new PlayerManager(client, lavatoken, {
-        user: client.user.id,
-        shards: client.shard.count
-    })
+    try {
+        client.lavalink = new PlayerManager(client, tokens.lavalink, {
+            user: client.user.id,
+            shards: client.shard.count
+        })
+        console.log("Lavalink connectado!!")
+    } catch (error) {
+        console.log(await clcError(error))
+        return process.exit()
+    }
 }
 
 runDiscord()

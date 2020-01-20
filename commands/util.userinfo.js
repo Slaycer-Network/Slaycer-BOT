@@ -35,7 +35,7 @@ module.exports = {
 
             const embed = new Discord.MessageEmbed()
                 .setTitle(`Informação de Conta do ${User.user.username}`)
-                .setThumbnail(User.user.displayAvatarURL())
+                .setThumbnail(User.user.displayAvatarURL({format: "png", dynamic: true}))
                 .setFooter(`*(Horario de Lisboa)`, 'https://i.imgur.com/Y7lq7lZ.png')
                 .addField(`Tag`, User.user.tag, true)
                 .addField(`ID`, User.user.id, true)

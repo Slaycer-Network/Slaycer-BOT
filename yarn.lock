@@ -691,10 +691,13 @@ fast-levenshtein@~2.0.6:
   resolved "https://registry.yarnpkg.com/fast-levenshtein/-/fast-levenshtein-2.0.6.tgz#3d8a5c66883a16a30ca8643e851f19baa7797917"
   integrity sha1-PYpcZog6FqMMqGQ+hR8Zuqd5eRc=
 
-ffmpeg-static@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/ffmpeg-static/-/ffmpeg-static-3.0.0.tgz#e5d259023682f118ea370eab937385c8da4c664f"
-  integrity sha512-LCBAB1J10ku7+SWbFTLJ4zjDtrniwYDMIyRmg1Vxvzst5TyCrsrfKHg1YPrvvsUhrzknTXxL6NoUG6s2xftbcg==
+ffmpeg-static@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/ffmpeg-static/-/ffmpeg-static-4.0.0.tgz#fb90e912170800cc642d70feaa3237fb5da24faf"
+  integrity sha512-9GELg6SKrijgf5iw073PiHonAty9Cg3cxeh8h4a2HHcOv+r0ZHRg3QGTAU/jvLhDFP6pu1UhnWqSwkIb3ZpvgQ==
+  dependencies:
+    progress "^2.0.3"
+    simple-get "^3.1.0"
 
 figures@^3.0.0:
   version "3.1.0"
@@ -1556,7 +1559,7 @@ process-nextick-args@~2.0.0:
   resolved "https://registry.yarnpkg.com/process-nextick-args/-/process-nextick-args-2.0.1.tgz#7820d9b16120cc55ca9ae7792680ae7dba6d7fe2"
   integrity sha512-3ouUOpQhtgrbOa17J7+uxOTpITYWaGP7/AhoR3+A+/1e9skrzelGi/dXzEYyvbxubEF6Wn2ypscTKiKJFFn1ag==
 
-progress@^2.0.0:
+progress@^2.0.0, progress@^2.0.3:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/progress/-/progress-2.0.3.tgz#7e8cf8d8f5b8f239c1bc68beb4eb78567d572ef8"
   integrity sha512-7PiHtLll5LdnKIMw100I+8xJXR5gW2QwWYkT6iJva0bXitZKa/XMrSbdmg3r2Xnaidz9Qumd0VPaMrZlF9V9sA==
@@ -1783,7 +1786,7 @@ simple-concat@^1.0.0:
   resolved "https://registry.yarnpkg.com/simple-concat/-/simple-concat-1.0.0.tgz#7344cbb8b6e26fb27d66b2fc86f9f6d5997521c6"
   integrity sha1-c0TLuLbib7J9ZrL8hvn21Zl1IcY=
 
-simple-get@^3.0.3:
+simple-get@^3.0.3, simple-get@^3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/simple-get/-/simple-get-3.1.0.tgz#b45be062435e50d159540b576202ceec40b9c6b3"
   integrity sha512-bCR6cP+aTdScaQCnQKbPKtJOKDp/hj9EDLJo3Nw4y1QksqaovlW/bnptB6/c1e+qmNIDHRK+oXFDdEqBT8WzUA==

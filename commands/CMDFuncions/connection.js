@@ -1,23 +1,28 @@
-/*global cnt, playList, played, playingNow*/
-/*eslint no-undef: "error"*/
-
 module.exports = {
     connect: async (client, message) => {
-        if (!message.member.voice.channel)
-    },
-    // eslint-disable-next-line no-unused-vars
-    events: async (connection, client, message) => {
-        connection.on("disconnect", () => {
-            if (playingNow[message.guild.id] && playingNow[message.guild.id].type === "youtube") {
-                playList[message.guild.id].splice(0)
-            }
-            playingNow[message.guild.id] = {}
-            played[message.guild.id].destroy()
-        })
+        if (!message.member.voice.channel) {
+            message.reply("vocês precisa de estar em 1 canal primeiro!!")
+            return
+        }
+        if (message.guild.me.voice.channel && message.guild.me.voice.channel !== message.member.voice.channel) {
+            message.reply("precisas de estar no mesmo canal que eu!!")
+            return
+        }
+        if (!message.guild.me.voice.channel && !message.member.voice.channel.joinable) {
+            message.reply("parece que não consigo entrar no canal pretendido!")
+            return
+        }
         
-        connection.on("error", async (error) => {
-            message.channel.send(`${message.author} por algum motivo tive um problema de conectar o canal de voz!! ${error}`)
+        try {
+            return await client.lavalink.join({
+                guild: message.guild.id,
+                channel: message.channel.id,
+                host: client.lavalink.nodes.first().host
+            })
+        } catch (error) {
+            message.reply("parece que houve 1 erro ao tentar entrar na sala! 😭")
             console.log(error)
-        })
+            return
+        }
     }
 }

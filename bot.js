@@ -60,8 +60,6 @@ async function runDiscord() {
     global.CMDs = require("./GlobalFuncions/cmd.js")
     global.up = require("./GlobalFuncions/uptime.js")
     global.bShard = require("./GlobalFuncions/broadcastShard.js")
-    global.playingNow = {}
-    global.played = {}
     global.playList = {}
 
     let mdb = await db((client.shard.ids[0] + 1))

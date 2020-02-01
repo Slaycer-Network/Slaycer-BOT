@@ -1,6 +1,8 @@
-/*global CMDs, playingNow, playList*/
+/*global CMDs, playList*/
 /*eslint no-undef: "error"*/
 const { search, isLink, typeResolve, loadType } = require("./CMDFuncions/search.js")
+const { connect } = require("./CMDFuncions/connection.js")
+const play = require("./CMDFuncions/dispatcher.js")
 
 module.exports = {
     help: {
@@ -21,7 +23,6 @@ module.exports = {
     // eslint-disable-next-line no-unused-vars
     run: async (client, message, args, cmd) => {
         try {
-            if (!message.member.voice.channel) return 
             if (!args[0]) return message.reply("você não escreveu nada para eu tocar!!")
 
             const song = await search(client ,await isLink(args.join(" ")))
@@ -32,7 +33,26 @@ module.exports = {
 
             let { tracks } = song
             if (tracks[0].info.isStream === true) return message.reply("este comando não disponibiliza suporta striming!!")
-            
+
+            const player = await connect(client, message)
+            console.log(player)
+            if (!player) return
+
+            if (!playList[message.guild.id] || !playList[message.guild.id][0]) {
+                if (!Array.isArray(playList[message.guild.id])) playList[message.guild.id] = []
+                playList[message.guild.id].push({
+                    track: tracks[0].track,
+                    info: tracks[0].info,
+                    dj: message.author
+                })
+                play.play(client, message, player, play)
+            } else {
+                playList[message.guild.id].push({
+                    track: tracks[0].track,
+                    info: tracks[0].info,
+                    dj: message.author
+                })
+            }
 
         } catch (error) {
             CMDs.erro(client, message, cmd, error)

@@ -690,11 +690,6 @@ fast-levenshtein@~2.0.6:
   resolved "https://registry.yarnpkg.com/fast-levenshtein/-/fast-levenshtein-2.0.6.tgz#3d8a5c66883a16a30ca8643e851f19baa7797917"
   integrity sha1-PYpcZog6FqMMqGQ+hR8Zuqd5eRc=
 
-ffmpeg-static@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/ffmpeg-static/-/ffmpeg-static-3.0.0.tgz#e5d259023682f118ea370eab937385c8da4c664f"
-  integrity sha512-LCBAB1J10ku7+SWbFTLJ4zjDtrniwYDMIyRmg1Vxvzst5TyCrsrfKHg1YPrvvsUhrzknTXxL6NoUG6s2xftbcg==
-
 figures@^3.0.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/figures/-/figures-3.1.0.tgz#4b198dd07d8d71530642864af2d45dd9e459c4ec"

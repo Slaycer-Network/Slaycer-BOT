@@ -16,7 +16,7 @@ module.exports = {
         try {
             return await client.lavalink.join({
                 guild: message.guild.id,
-                channel: message.channel.id,
+                channel: message.member.voice.channel.id,
                 host: client.lavalink.nodes.first().host
             })
         } catch (error) {

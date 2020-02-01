@@ -24,7 +24,7 @@
     "discord.js": "github:discordjs/discord.js",
     "moment": "^2.24.0",
     "moment-timezone": "^0.5.27",
-    "mongoose": "^5.8.9",
+    "mongoose": "^5.8.11",
     "node-opus": "^0.3.3",
     "prism-media": "1.2.0",
     "simple-youtube-api": "^5.2.1",

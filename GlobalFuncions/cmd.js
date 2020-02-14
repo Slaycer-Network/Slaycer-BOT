@@ -56,7 +56,7 @@ module.exports = {
 
     erro: async (client, message, command, error) => {
         let shardID = (client.shard.ids[0] + 1)
-        message.channel.send(`${message.author} algo deu muito errado deu errado!\nDescupe pelo inconveniência!! \`${error.message}\``)
+        message.channel.send(`${message.author} algo deu muito errado deu errado!\nDescupe pela inconveniência!! \`${error.message}\``)
         console.log(await mCmd("execError", shardID, command))
         console.log(await clcError(error))
     }

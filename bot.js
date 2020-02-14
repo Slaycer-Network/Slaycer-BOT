@@ -49,10 +49,10 @@ async function db(shardID) {
 async function runDiscord() {
     const Discord = require("discord.js")
     const client = new Discord.Client()
+    const { PlayerManager } = require("discord.js-lavalink")
 
     client.prefix = config.discord.prefix
     client.dev = config.discord.dev
-    client.ytAPI = tokens.youtube.API
     client.cooldown = new Set()
     global.startRun = Date.now()
     global.commands = {}
@@ -60,9 +60,6 @@ async function runDiscord() {
     global.CMDs = require("./GlobalFuncions/cmd.js")
     global.up = require("./GlobalFuncions/uptime.js")
     global.bShard = require("./GlobalFuncions/broadcastShard.js")
-    global.playingNow = {}
-    global.cnt = {}
-    global.played = {}
     global.playList = {}
 
     let mdb = await db((client.shard.ids[0] + 1))
@@ -106,7 +103,18 @@ async function runDiscord() {
     try {
         await client.login(tokens.discord.token)
     } catch (error) {
-        console(await clcError(error))
+        console.log(await clcError(error))
+        return process.exit()
+    }
+
+    try {
+        client.lavalink = new PlayerManager(client, tokens.lavalink, {
+            user: client.user.id,
+            shards: client.shard.count
+        })
+        console.log("Lavalink connectado!!")
+    } catch (error) {
+        console.log(await clcError(error))
         return process.exit()
     }
 }

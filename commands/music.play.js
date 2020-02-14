@@ -3,6 +3,7 @@
 const { search, isLink, typeResolve, loadType } = require("./CMDFuncions/search.js")
 const { connect } = require("./CMDFuncions/connection.js")
 const play = require("./CMDFuncions/dispatcher.js")
+const list = require("./CMDFuncions/playing.js")
 
 module.exports = {
     help: {
@@ -35,7 +36,6 @@ module.exports = {
             if (tracks[0].info.isStream === true) return message.reply("este comando não disponibiliza suporta striming!!")
 
             const player = await connect(client, message)
-            console.log(player)
             if (!player) return
 
             if (!playList[message.guild.id] || !playList[message.guild.id][0]) {
@@ -46,12 +46,15 @@ module.exports = {
                     dj: message.author
                 })
                 play.play(client, message, player, play)
+
+                message.reply(await list.youtubeFist(message.guild.id))
             } else {
                 playList[message.guild.id].push({
                     track: tracks[0].track,
                     info: tracks[0].info,
                     dj: message.author
                 })
+                message.reply(await list.youtubeAdd(message.guild.id))
             }
 
         } catch (error) {

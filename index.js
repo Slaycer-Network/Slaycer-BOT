@@ -3,14 +3,18 @@ const { ShardingManager } = require("discord.js") //Chamar o gerenciador de shar
 const tokens = require("./configs/tokens.js") //Chama o arquivo onde tem os tokens
 const locales = require("./locales/console/shardManerger.js")
 
-const events = fs.readdirSync("./events/shardManager/", {withFileTypes: true, encoding: "utf-8"})
+const events = fs.readdirSync("./events/shardManager/", {
+    withFileTypes: true, 
+    encoding: "utf-8"
+})
 
 if (!tokens.discord.token) {
     console.log(locales.noTokenDC)
     return process.exit()
 }
 
-var manager = new ShardingManager("./bot.js", {
+const manager = new ShardingManager("./bot.js", {
+    mode: "worker",
     token: tokens.discord.token
 })
     
@@ -23,6 +27,9 @@ manager.on("shardCreate", async (shard) => {
     events.forEach(async (file) => {
         if(file.isDirectory()) return
         let isJs = file.name.split(".").slice(-1)[0]
-        if(isJs === "")
+        if(isJs !== "js") return
+        const event = file.name.split(".")[0]
+        const run = require(`./events/shardManager/${file.name}`)
+        shard.on(event, run.bind(null, shard))
     })
 })

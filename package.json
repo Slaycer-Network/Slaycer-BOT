@@ -12,14 +12,14 @@
     "url": "git+https://github.com/Slaycer-Network/Slaycer-BOT.git"
   },
   "author": "Sérgio Glórias",
-  "license": "GPL-3.0",
+  "license": "AGPL-3.0",
   "bugs": {
     "url": "https://github.com/Slaycer-Network/Slaycer-BOT/issues"
   },
   "homepage": "https://github.com/Slaycer-Network/Slaycer-BOT#readme",
   "dependencies": {
     "cli-color": "^2.0.0",
-    "discord.js": "^12.1.1"
+    "discord.js": "^12.2.0"
   },
   "devDependencies": {
     "eslint": "^6.8.0",

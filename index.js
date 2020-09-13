@@ -3,6 +3,11 @@ const { ShardingManager } = require("discord.js") //Chamar o gerenciador de shar
 const tokens = require("./configs/tokens.js") //Chama o arquivo onde tem os tokens
 const locales = require("./locales/console/shardManerger.js")
 
+global.webhookAlerts = {
+    erro: require("./webhooksAlerts/error.js"),
+    shardManerger: require("./webhooksAlerts/shardManeger.js")
+}
+
 const events = fs.readdirSync("./events/shardManager/", {
     withFileTypes: true, 
     encoding: "utf-8"

@@ -1,5 +1,15 @@
 const discord = {
-    token: ""
+    token: "",
+    webhooksAlets: {
+        shardManeger: {
+            hookID: "",
+            token: ""
+        },
+        errorCode:{
+            hookID: "",
+            token: ""
+        }
+    }
 }
 
 module.exports = {

@@ -19,7 +19,7 @@
   "homepage": "https://github.com/Slaycer-Network/Slaycer-BOT#readme",
   "dependencies": {
     "cli-color": "^2.0.0",
-    "discord.js": "^12.3.1"
+    "discord.js": "^12.4.1"
   },
   "devDependencies": {
     "eslint": "^7.6.0",

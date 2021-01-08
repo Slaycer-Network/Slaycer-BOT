@@ -8,8 +8,19 @@ const cyan = clc.cyanBright
 //----------------
 
 function tagGenretor(typeShard) {
-    if (typeShard === "SM") return cyan("[ShardingManager]")
-    else if (isNaN(typeShard)) return cyan(`[Shard-${typeShard+1}]`)
+    let type
+    switch (typeShard) {
+        case "SM":
+            type = cyan("[ShardingManager]")
+            break;
+        case "Web":
+            type = cyan("[Webhook]")
+            break;
+        default:
+            type = cyan(`[Shard-${typeShard+1}]`)
+            break;
+    }
+    return type
 }
 
 module.exports = {

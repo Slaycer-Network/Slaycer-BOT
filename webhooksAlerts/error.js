@@ -1,18 +1,20 @@
 const 
     { WebhookClient, MessageEmbed } = require("discord.js"),
-    { errorCode } = require("../configs/tokens.js").discord.webhooksAlets
+    { errorCode } = require("../configs/tokens.js").discord.webhooksAlets,
+    webLocale = require("../locales/webhook/error.js"),
+    consoleLocale = require("../locales/console/webhook.js")
 
 const webhook = new WebhookClient(errorCode.hookID, errorCode.token)
 
 async function hookErrorAlert(erro = "", shardID) {
     const embed = new MessageEmbed()
-        .setTitle(`[Shard-${shardID}] Erro de Codigo`)
+        .setTitle(webLocale.embed.title(shardID))
         .setColor("RED")
         .setTimestamp()
-        .setFooter()
+        .setFooter(webLocale.embed.footer)
     
     let messageERR
-    if (erro.length > 2020) messageERR = erro.slice(-2020)
+    if (erro.length > 2000) messageERR = erro.slice(-2000)
     else messageERR = erro
 
     embed.setDescription(`\`\`\`\n${messageERR}\n\`\`\``)
@@ -23,6 +25,7 @@ async function hookErrorAlert(erro = "", shardID) {
                 embed
             ]
         })
+        console.log()
     } catch (error) {
         
     }

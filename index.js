@@ -1,7 +1,8 @@
-const fs = require("fs")
-const { ShardingManager } = require("discord.js") //Chamar o gerenciador de shards da discord.js
-const tokens = require("./configs/tokens.js") //Chama o arquivo onde tem os tokens
-const locales = require("./locales/console/shardManerger.js")
+const 
+    fs = require("fs"),
+    { ShardingManager } = require("discord.js"), //Chamar o gerenciador de shards da discord.js
+    tokens = require("./configs/tokens.js"), //Chama o arquivo onde tem os tokens
+    locales = require("./locales/console/shardManerger.js")
 
 global.webhookAlerts = {
     erro: require("./webhooksAlerts/error.js"),

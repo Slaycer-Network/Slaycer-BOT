@@ -4,11 +4,6 @@ const
     tokens = require("./configs/tokens.js"), //Chama o arquivo onde tem os tokens
     locales = require("./locales/console/shardManerger.js")
 
-global.webhookAlerts = {
-    erro: require("./webhooksAlerts/error.js"),
-    shardManerger: require("./webhooksAlerts/shardManeger.js")
-}
-
 const events = fs.readdirSync("./events/shardManager/", {
     withFileTypes: true, 
     encoding: "utf-8"
@@ -20,7 +15,6 @@ if (!tokens.discord.token) {
 }
 
 const manager = new ShardingManager("./bot.js", {
-    mode: "worker",
     token: tokens.discord.token
 })
     

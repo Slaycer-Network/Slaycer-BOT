@@ -1,29 +1,12 @@
 {
   "name": "slaycer-bot",
   "version": "1.0.0",
-  "description": "Um bot de discord",
   "main": "index.js",
-  "scripts": {
-    "start": "node index.js",
-    "devstart": "nodemon index.js",
-    "bot": "node bot.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Slaycer-Network/Slaycer-BOT.git"
-  },
-  "author": "Sérgio Glórias",
+  "repository": "https://github.com/Slaycer-Network/Slaycer-BOT.git",
+  "author": "Sergio Glorias <sergioglorias@gmail.com>",
   "license": "AGPL-3.0",
-  "bugs": {
-    "url": "https://github.com/Slaycer-Network/Slaycer-BOT/issues"
-  },
-  "homepage": "https://github.com/Slaycer-Network/Slaycer-BOT#readme",
   "dependencies": {
     "cli-color": "^2.0.0",
-    "discord.js": "^12.4.1"
-  },
-  "devDependencies": {
-    "eslint": "^7.6.0",
-    "nodemon": "^2.0.4"
+    "discord.js": "^12.5.1"
   }
 }
